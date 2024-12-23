@@ -1,11 +1,18 @@
+import "./ui/globalStyles.scss";
+import Navbar from "./ui/NavBar";
+import currentUser from "./assets/currentUser.svg";
 
 function App() {
-
   return (
     <>
-      App Setup
+      <Navbar
+        userImage={currentUser}
+        onSearch={(query) => {
+          console.log("query:", query);
+        }}
+      />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
