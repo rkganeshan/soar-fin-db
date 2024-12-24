@@ -1,0 +1,35 @@
+.card {
+  transition: transform 0.2s;
+  min-width: 350px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.balance-text-dark {
+  color: #b1b1b1;
+}
+
+.balance-text-light {
+  color: #6b7280;
+}
+
+.card-number-section {
+  border-top: 1px solid #e5e7eb;
+}
+
+.card-number-section-dark {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  background: linear-gradient(to right, #333, #444);
+}
+
+.toggle-icon svg {
+  fill: currentColor;
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1220px) {
+  .card {
+    width: auto;
+  }
+}
