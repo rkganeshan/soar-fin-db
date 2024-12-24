@@ -22,11 +22,17 @@ const Navbar: React.FC<NavbarProps> = ({ userImage, onSearch }) => {
 
   return (
     <>
-      <div className="navbar-container p-4 bg-white shadow">
+      <div
+        className={`navbar-container p-4 bg-white shadow transition-transform duration-300 ${
+          isFlyoutOpen ? "md:ml-64" : ""
+        }`}
+      >
         <div className="navbar-content flex flex-col md:flex-row md:items-center md:justify-between">
           <div className="navbar-left flex items-center justify-between space-x-4">
             <button
-              className="navbar-hamburger p-2 hover:bg-gray-200"
+              className={`navbar-hamburger p-2 hover:bg-gray-200 ${
+                isFlyoutOpen ? "lg:hidden" : ""
+              }`}
               onClick={toggleFlyout}
             >
               <img

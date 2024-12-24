@@ -20,7 +20,7 @@ const FlyoutMenu: React.FC<FlyoutMenuProps> = ({ isOpen, onClose }) => {
   const currentTab: string = "dashboard";
   return (
     <div
-      className={`flyout-menu fixed inset-0 bg-black bg-opacity-50 z-50 transition-transform ${
+      className={`flyout-menu fixed inset-0 bg-black sm:bg-opacity-0 bg-opacity-10 z-50 transition-transform ${
         isOpen ? "translate-x-0" : "-translate-x-full"
       }`}
       onClick={onClose}
@@ -30,7 +30,7 @@ const FlyoutMenu: React.FC<FlyoutMenuProps> = ({ isOpen, onClose }) => {
         onClick={(e) => e.stopPropagation()}
       >
         <div
-          className="flyout-header p-6 border-b flex items-center space-x-2 cursor-pointer"
+          className="flyout-header p-6 flex items-center space-x-2 cursor-pointer"
           onClick={onClose}
         >
           <FlyoutHeader className="h-5 w-5 mr-2" />
