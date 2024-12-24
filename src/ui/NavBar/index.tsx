@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
+import { useGlobalContext } from "../../context";
+import { useCurrentURL } from "../../hooks";
+import { getPageTitleByPathName } from "../../utils";
+import FlyoutMenu from "../Flyout";
 import navigationHamburger from "../../assets/navigationHamburger.svg";
 import searchSVG from "../../assets/search.svg";
 import settingsSVG from "../../assets/settings.svg";
 import notificationSVG from "../../assets/notification.svg";
-import FlyoutMenu from "../Flyout";
 
 interface NavbarProps {
   userImage: string;
@@ -11,22 +14,13 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ userImage, onSearch }) => {
-  const [isFlyoutOpen, setFlyoutOpen] = useState(false);
+  const { isFlyoutOpen, toggleFlyout } = useGlobalContext();
 
-  // TODO : After adding react router, make appropriate changes to title
-  const navbarTitle = "Overview";
-
-  const toggleFlyout = () => {
-    setFlyoutOpen(!isFlyoutOpen);
-  };
+  const { pathname } = useCurrentURL();
 
   return (
     <>
-      <div
-        className={`navbar-container p-4 bg-white shadow transition-transform duration-300 ${
-          isFlyoutOpen ? "md:ml-64" : ""
-        }`}
-      >
+      <div className="navbar-container p-4 bg-white shadow">
         <div className="navbar-content flex flex-col md:flex-row md:items-center md:justify-between">
           <div className="navbar-left flex items-center justify-between space-x-4">
             <button
@@ -42,7 +36,7 @@ const Navbar: React.FC<NavbarProps> = ({ userImage, onSearch }) => {
               />
             </button>
             <div className="navbar-title text-xl font-semibold text-gray-800">
-              {navbarTitle}
+              {getPageTitleByPathName(pathname)}
             </div>
             <img
               src={userImage}

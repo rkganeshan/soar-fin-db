@@ -1,4 +1,3 @@
-import "./ui/globalStyles.scss";
 import Navbar from "./ui/NavBar";
 import currentUser from "./assets/currentUser.svg";
 
