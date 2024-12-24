@@ -31,7 +31,7 @@ const Navbar: React.FC<NavbarProps> = ({ userImage, onSearch }) => {
           <div className="navbar-left flex items-center justify-between space-x-4">
             <button
               className={`navbar-hamburger p-2 hover:bg-gray-200 ${
-                isFlyoutOpen ? "lg:hidden" : ""
+                isFlyoutOpen ? "md:hidden" : ""
               }`}
               onClick={toggleFlyout}
             >
