@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  padding-bottom: 14px;
 }
 
 @media (min-width: 1024px) {
@@ -11,7 +12,11 @@
 }
 
 .my-cards-section,
-.recent-transactions-section {
+.recent-transactions-section,
+.weekly-activity-section,
+.expense-statistics-section,
+.quick-transfer-section,
+.balance-history-section {
   flex-grow: 1;
   display: flex;
   flex-direction: column;

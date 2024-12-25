@@ -19,7 +19,7 @@ const Layout = () => {
           console.log("query:", query);
         }}
       />
-      <div className="main-content p-4 bg-gray-100 flex-grow">
+      <div className="main-content p-4 md:bg-gray-100 flex-grow">
         <div
           className={`content-wrapper ${isFlyoutOpen ? "ml-4" : "lg:ml-12"}`}
         >
