@@ -47,7 +47,7 @@ const RecentTransactions = forwardRef<HTMLElement>((_, ref) => {
 
   return (
     <div className="recent-transactions h-full">
-      <h2 className="text-lg font-semibold mb-4" style={{ color: "#343C6A" }}>
+      <h2 className="text-lg font-semibold mb-2" style={{ color: "#343C6A" }}>
         Recent Transaction
       </h2>
       <div className="transactions-container flex-grow pt-2">
