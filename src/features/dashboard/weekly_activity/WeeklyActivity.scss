@@ -1,0 +1,10 @@
+.chart-container {
+  height: 290px;
+}
+
+@media screen and (max-width: 768px) {
+  .chart-container {
+    height: 270px;
+    padding-left: 12px !important;
+  }
+}
