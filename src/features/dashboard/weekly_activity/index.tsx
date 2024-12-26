@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { Bar } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
-import useMediaQuery from "../../../hooks/useMediaQuery"; // Ensure correct path to the hook
+import useMediaQuery from "../../../hooks/useMediaQuery";
 import "../../../utils/chartSetup";
 import "./WeeklyActivity.scss";
 

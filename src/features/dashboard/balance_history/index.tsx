@@ -1,7 +1,10 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
+import { Chart, registerables } from "chart.js";
 import "../../../utils/chartSetup";
 import "./BalanceHistory.scss";
+
+Chart.register(...registerables);
 
 const BalanceHistory: React.FC = () => {
   const data = {
@@ -23,9 +26,9 @@ const BalanceHistory: React.FC = () => {
             0,
             chartArea.bottom
           );
-          gradient.addColorStop(0.2, "rgba(84, 119, 235, 0.4)"); // Start with 40% opacity at the top
-          gradient.addColorStop(0.8, "rgba(93, 107, 160, 0.2)"); // 20% opacity in the middle
-          gradient.addColorStop(1, "rgba(136, 159, 241, 0)"); // Fully transparent at the bottom
+          gradient.addColorStop(0.2, "rgba(84, 119, 235, 0.4)");
+          gradient.addColorStop(0.8, "rgba(93, 107, 160, 0.2)");
+          gradient.addColorStop(1, "rgba(136, 159, 241, 0)");
           return gradient;
         },
         borderColor: "#1814F3",
