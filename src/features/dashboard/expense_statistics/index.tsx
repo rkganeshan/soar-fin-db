@@ -1,21 +1,51 @@
 import React from "react";
 import { Pie } from "react-chartjs-2";
-import "../../../utils/chartSetup";
 
 const ExpenseStatistics: React.FC = () => {
   const data = {
-    labels: ["Entertainment", "Bill Expense", "Investment", "Others"],
+    labels: ["Entertainment", "Investment", "Bill Expense", "Others"],
     datasets: [
       {
-        data: [30, 15, 20, 35],
-        backgroundColor: ["#36A2EB", "#FF6384", "#FFCE56", "#4BC0C0"],
+        data: [30, 20, 35, 15],
+        backgroundColor: ["#FC7900", "#396AFF", "#343C6A", "#232323"],
+        borderColor: "#fff",
+        borderWidth: 2,
+        hoverOffset: 20,
+        offset: [5, 40, 5, 30],
       },
     ],
   };
 
-  const options = {
+  const options: any = {
     responsive: true,
     maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: false,
+      },
+      tooltip: {
+        enabled: false,
+      },
+      datalabels: {
+        color: "#fff",
+        font: {
+          weight: "bold",
+          size: 12,
+        },
+        textAlign: "center",
+        formatter: (value: number, context: any) => {
+          const percentage = `${value}%`;
+          const label = context.chart.data.labels[context.dataIndex];
+          return `${percentage}\n${label}`;
+        },
+        align: ["center", "end", "center", "center"],
+        anchor: "center",
+      },
+    },
+    animation: {
+      animateRotate: true,
+      animateScale: true,
+    },
   };
 
   return (
