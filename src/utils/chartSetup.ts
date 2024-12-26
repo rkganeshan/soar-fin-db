@@ -8,10 +8,12 @@ import {
   Legend,
   ArcElement,
   PointElement,
-  LineElement
+  LineElement,
 } from "chart.js";
+import ChartDataLabels from "chartjs-plugin-datalabels";
 
 ChartJS.register(
+  ChartDataLabels,
   CategoryScale,
   LinearScale,
   BarElement,

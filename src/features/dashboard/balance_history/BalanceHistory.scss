@@ -1,0 +1,11 @@
+@media screen and (min-width: 1024px) {
+  .line-chart-container {
+    height: 276px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .line-chart-container {
+    height: 220px;
+  }
+}
