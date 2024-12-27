@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { GlobalProvider } from "../context";
+import { GlobalProvider, ToastProvider } from "../context";
 import Dashboard from "../features/dashboard";
 import Settings from "../features/settings";
 import Transactions from "../features/transactions";
@@ -20,7 +20,9 @@ const AppRouter = () => {
           path={routerPath.DASHBOARD.ROUTE}
           element={
             <GlobalProvider>
-              <Layout />
+              <ToastProvider>
+                <Layout />
+              </ToastProvider>
             </GlobalProvider>
           }
         >

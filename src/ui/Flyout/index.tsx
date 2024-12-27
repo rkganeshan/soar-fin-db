@@ -24,7 +24,7 @@ const FlyoutMenu: React.FC<FlyoutMenuProps> = ({ isOpen, onClose }) => {
 
   return (
     <div
-      className={`flyout-menu fixed inset-y-0 left-0 transition-transform duration-300 ${
+      className={`flyout-menu fixed inset-y-0 left-0 transition-transform duration-300 z-50 ${
         isOpen ? "translate-x-0" : "-translate-x-full"
       }`}
     >
