@@ -1,23 +1,12 @@
 import { useEffect, useRef } from "react";
+import { useSettingsContext } from "../../context/settingsContext";
+import { settingsTabs } from "../../constants/settingsTabs";
 import "./Tabs.scss";
 
-interface Tab {
-  key: string;
-  label: string;
-}
-
-interface TabsProps<T extends string> {
-  tabs: Tab[];
-  activeTab: T;
-  onTabChange: (tab: T) => void;
-}
-
-const Tabs = <T extends string>({
-  tabs,
-  activeTab,
-  onTabChange,
-}: TabsProps<T>) => {
+const Tabs = () => {
+  const { activeTab, setActiveTab } = useSettingsContext();
   const tabsRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (tabsRef.current) {
       // Calculate the scroll position to center the active tab
@@ -39,19 +28,20 @@ const Tabs = <T extends string>({
       }
     }
   }, [activeTab]);
+
   return (
     <div
       ref={tabsRef}
       className="tabs flex justify-start mb-6 overflow-x-auto whitespace-nowrap"
     >
-      {tabs.map((tab) => (
+      {settingsTabs.map((tab) => (
         <button
           key={tab.key}
           data-active={tab.key}
           className={`tab mr-4 p-2 font-medium ${
             activeTab === tab.key ? "active border-b-2 border-black" : ""
           }`}
-          onClick={() => onTabChange(tab.key as T)}
+          onClick={() => setActiveTab(tab.key)}
         >
           {tab.label}
         </button>

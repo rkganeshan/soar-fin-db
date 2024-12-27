@@ -1,5 +1,6 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import { useToast } from "../../../../context";
+import { useSettingsContext } from "../../../../context/settingsContext";
 import {
   getBase64FromFile,
   handleImageUpload,
@@ -8,15 +9,10 @@ import { ToastType } from "../../../../types/enums";
 import CurrentUser from "../../../../assets/currentUser.svg";
 import EditIcon from "../../../../assets/pencil.svg?react";
 
-interface ProfilePictureProps {
-  onProfilePictureChange: (file: File) => void;
-}
-
-const ProfilePicture: React.FC<ProfilePictureProps> = ({
-  onProfilePictureChange,
-}) => {
+const ProfilePicture = () => {
+  const { previewUrl, setPreviewUrl, setIsProfilePhotoUpdated } =
+    useSettingsContext();
   const { showToast } = useToast();
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleEditClick = () => {
@@ -35,16 +31,19 @@ const ProfilePicture: React.FC<ProfilePictureProps> = ({
         const base64Url = await getBase64FromFile(file);
         setPreviewUrl(base64Url as string);
 
-        const success = handleImageUpload(file, onProfilePictureChange);
+        const success = handleImageUpload(
+          file,
+          (file: File) => file && setIsProfilePhotoUpdated(true)
+        );
         if (success) {
           showToast({
-            message: "Image Added. Click 'Save' to apply changes.",
+            message: "Profile picture added. Click 'Save' to apply changes.",
             type: ToastType.Warning,
           });
         }
       } catch (error) {
         showToast({
-          message: "Failed to update image.",
+          message: "Failed to update profile picture.",
           type: ToastType.Error,
         });
       }
@@ -70,7 +69,7 @@ const ProfilePicture: React.FC<ProfilePictureProps> = ({
           className="edit-btn absolute bottom-0 right-0"
           onClick={handleEditClick}
         >
-          <EditIcon className="edit-icon w-6 h-6 rounded-full" />
+          <EditIcon className="edit-icon w-8 h-8 md:w-6 md:h-6 rounded-full" />
         </button>
       </div>
     </div>

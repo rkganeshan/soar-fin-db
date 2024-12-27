@@ -1,23 +1,15 @@
+import { useSettingsContext } from "../../../../context/settingsContext";
 import DatePickerField from "../../../../ui/DatePickerField";
 import InputField from "../../../../ui/InputField";
 import { getUserFormFields } from "../../../../utils/userForm";
-import { FormFields, UserForm } from "../../../../types/UserForm";
+import { FormFields } from "../../../../types/UserForm";
 import {
   FormFieldDataType,
   FormValidationKeys,
 } from "../../../../types/enums/FormFieldInput";
 
-interface ProfileFormProps {
-  formValues: UserForm;
-  onInputChange: (
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => void;
-}
-
-const ProfileForm: React.FC<ProfileFormProps> = ({
-  formValues,
-  onInputChange,
-}) => {
+const ProfileForm = () => {
+  const { formValues, onInputChange } = useSettingsContext();
   const fields = getUserFormFields();
 
   const renderField = (args: FormFields) => {
