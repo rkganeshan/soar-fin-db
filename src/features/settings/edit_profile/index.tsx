@@ -1,11 +1,27 @@
 import { useSettingsContext } from "../../../context/settingsContext";
 import ProfilePicture from "./form/ProfilePicture";
 import ProfileForm from "./form/ProfileForm";
+import Alert from "../../../ui/Alert";
+import Spinner from "../../../ui/Spinner";
 import SaveButton from "./SaveButton";
 import "./EditProfile.scss";
 
 const EditProfileForm = () => {
-  const { originalValues } = useSettingsContext();
+  const { originalValues, isLoadingUserInfo, isErrorUserInfo } =
+    useSettingsContext();
+
+  if (isLoadingUserInfo) {
+    return <Spinner loaderText="Retrieving your profile..." />;
+  }
+
+  if (isErrorUserInfo) {
+    return (
+      <Alert
+        message="Failed to retrieve your profile at the moment."
+        type="error"
+      />
+    );
+  }
 
   if (!originalValues?.name) {
     return null;

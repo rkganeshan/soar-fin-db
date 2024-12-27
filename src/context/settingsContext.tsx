@@ -6,13 +6,14 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { fetchUserData } from "../services/api";
+import { useFetchData } from "../hooks/useFetchData";
 import { validateFormFields } from "../utils";
 import { useToast } from ".";
 import { UserData } from "../types/UserData";
 import { UserForm } from "../types/UserForm";
 import { SettingsTab, ToastType } from "../types/enums";
 import { defaultFormValues } from "../constants";
+import { API_ROUTES } from "../constants/apiRoutes";
 
 interface SettingsContextType {
   activeTab: SettingsTab;
@@ -30,6 +31,8 @@ interface SettingsContextType {
   ) => void;
   onEditProfileFormSave: () => void;
   isEditProfileSaveBtnDisabled: boolean;
+  isLoadingUserInfo: boolean;
+  isErrorUserInfo: boolean;
 }
 const SettingsContext = createContext<SettingsContextType | undefined>(
   undefined
@@ -57,6 +60,12 @@ export const SettingsProvider: React.FC<{ children: ReactNode }> = ({
   const [originalValues, setOriginalValues] = useState<UserForm | null>(null);
   const [isProfilePhotoUpdated, setIsProfilePhotoUpdated] =
     useState<boolean>(false);
+
+  const {
+    isFetching: isLoadingUserInfo,
+    isError: isErrorUserInfo,
+    data,
+  } = useFetchData<UserData>(API_ROUTES.getUserProfile);
 
   const isFormModified =
     originalValues &&
@@ -86,22 +95,19 @@ export const SettingsProvider: React.FC<{ children: ReactNode }> = ({
       type: ToastType.Success,
     });
     setOriginalValues(formValues);
+    setIsProfilePhotoUpdated(false);
   };
 
   useEffect(() => {
-    const getUserData = async () => {
-      const data: UserData = await fetchUserData();
+    if (data) {
       const modifiedData: UserForm = {
         ...data,
         validations: {},
       };
-
       setFormValues(modifiedData);
       setOriginalValues(modifiedData);
-    };
-
-    getUserData();
-  }, []);
+    }
+  }, [data]);
 
   return (
     <SettingsContext.Provider
@@ -119,6 +125,8 @@ export const SettingsProvider: React.FC<{ children: ReactNode }> = ({
         onInputChange: handleInputChange,
         onEditProfileFormSave: handleSaveEditProfileForm,
         isEditProfileSaveBtnDisabled,
+        isLoadingUserInfo,
+        isErrorUserInfo,
       }}
     >
       {children}

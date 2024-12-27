@@ -37,13 +37,13 @@ const ProfilePicture = () => {
         );
         if (success) {
           showToast({
-            message: "Image Added. Click 'Save' to apply changes.",
+            message: "Profile picture added. Click 'Save' to apply changes.",
             type: ToastType.Warning,
           });
         }
       } catch (error) {
         showToast({
-          message: "Failed to update image.",
+          message: "Failed to update profile picture.",
           type: ToastType.Error,
         });
       }
@@ -69,7 +69,7 @@ const ProfilePicture = () => {
           className="edit-btn absolute bottom-0 right-0"
           onClick={handleEditClick}
         >
-          <EditIcon className="edit-icon w-6 h-6 rounded-full" />
+          <EditIcon className="edit-icon w-8 h-8 md:w-6 md:h-6 rounded-full" />
         </button>
       </div>
     </div>
