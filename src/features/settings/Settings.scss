@@ -1,0 +1,28 @@
+.settings-page {
+  .tab-content-wrapper {
+    height: 100%;
+    overflow: hidden;
+
+    .tab-content {
+      opacity: 0;
+      width: 100%;
+      transform: translateX(100%);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .tab-content.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .tab-content.exit-left {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+
+    .tab-content.exit-right {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+  }
+}

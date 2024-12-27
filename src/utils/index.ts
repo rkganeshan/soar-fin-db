@@ -1,3 +1,5 @@
+import { emailRegex, passwordRegex } from "./regex";
+import { validateField, validateFormFields } from "./userForm";
 import { routerPath } from "../constants";
 
 const getPageTitleByPathName = (pathName: string): string => {
@@ -7,4 +9,10 @@ const getPageTitleByPathName = (pathName: string): string => {
   return routeEntry?.TITLE || "Page Not Found";
 };
 
-export {getPageTitleByPathName}
+export {
+  emailRegex,
+  passwordRegex,
+  getPageTitleByPathName,
+  validateField,
+  validateFormFields,
+};
