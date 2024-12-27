@@ -6,4 +6,12 @@ export enum FormFieldDataType {
 export enum FormValidationKeys {
   Email = "email",
   Password = "password",
+  Name = "name",
+  Username = "username",
+  DateOfBirth = "dateOfBirth",
+  PresentAddress = "presentAddress",
+  PermanentAddress = "permanentAddress",
+  City = "city",
+  PostalCode = "postalCode",
+  Country = "country",
 }

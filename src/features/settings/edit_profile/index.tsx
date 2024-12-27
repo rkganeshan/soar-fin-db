@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useToast } from "../../../context";
 import { fetchUserData } from "../../../services/api";
-import { validateField } from "../../../utils";
+import { validateFormFields } from "../../../utils";
 import ProfilePicture from "./form/ProfilePicture";
 import ProfileForm from "./form/ProfileForm";
 import SaveButton from "./SaveButton";
@@ -22,12 +22,11 @@ const EditProfileForm: React.FC = () => {
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = event.target;
-    const validations = validateField(formValues.validations, name, value);
-    setFormValues({
+    const validatedFormValues = validateFormFields({
       ...formValues,
       [name]: value,
-      validations,
     });
+    setFormValues(validatedFormValues);
   };
 
   const handleProfilePictureChange = (file: File) => {
@@ -48,10 +47,7 @@ const EditProfileForm: React.FC = () => {
     originalValues &&
     JSON.stringify(formValues) !== JSON.stringify(originalValues);
 
-  const hasValidationErrors = Boolean(
-    formValues.validations.email.message ||
-      formValues.validations.password.message
-  );
+  const hasValidationErrors = Object.keys(formValues.validations).length > 0;
 
   const saveButtonDisabledState = !(
     (isFormModified && !hasValidationErrors) ||
@@ -63,10 +59,7 @@ const EditProfileForm: React.FC = () => {
       const data: UserData = await fetchUserData();
       const modifiedData: UserForm = {
         ...data,
-        validations: {
-          email: { message: "" },
-          password: { message: "" },
-        },
+        validations: {},
       };
 
       setFormValues(modifiedData);
@@ -76,7 +69,7 @@ const EditProfileForm: React.FC = () => {
     getUserData();
   }, []);
 
-  if (!formValues.name) {
+  if (!originalValues?.name) {
     return null;
   }
 

@@ -11,5 +11,5 @@ export const defaultFormValues: UserForm = {
   city: "",
   postalCode: "",
   country: "",
-  validations: { email: { message: "" }, password: { message: "" } },
+  validations: {},
 };
