@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { GlobalProvider, ToastProvider } from "../context";
+import { SettingsProvider } from "../context/settingsContext";
 import Dashboard from "../features/dashboard";
 import Settings from "../features/settings";
 import Transactions from "../features/transactions";
@@ -46,7 +47,14 @@ const AppRouter = () => {
             path={routerPath.MY_PRIVILEGES.ROUTE}
             element={<Privileges />}
           />
-          <Route path={routerPath.SETTINGS.ROUTE} element={<Settings />} />
+          <Route
+            path={routerPath.SETTINGS.ROUTE}
+            element={
+              <SettingsProvider>
+                <Settings />
+              </SettingsProvider>
+            }
+          />
         </Route>
       </Routes>
     </>
