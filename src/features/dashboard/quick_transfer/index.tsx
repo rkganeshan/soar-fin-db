@@ -88,10 +88,12 @@ const QuickTransfer: React.FC = () => {
               setIsShowingAll={setIsShowingAll}
               setSelectedRecipient={setSelectedRecipient}
             />
-            <AmountInputAndTransfer
-              recipient={selectedRecipient}
-              setSelectedRecipient={setSelectedRecipient}
-            />
+            {visibleUsers && (
+              <AmountInputAndTransfer
+                recipient={selectedRecipient}
+                setSelectedRecipient={setSelectedRecipient}
+              />
+            )}
           </>
         )}
       </div>
