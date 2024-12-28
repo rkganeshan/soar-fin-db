@@ -7,7 +7,7 @@ import Person5 from "../assets/person-5.png";
 export const userProfilePicMock = {
   "Livia Bator": Person1,
   "Randy Press": Person2,
-  "Workman": Person3,
+  "Robert Jacob": Person3,
   "John Doe": Person4,
   "Jane Smith": Person5,
 };

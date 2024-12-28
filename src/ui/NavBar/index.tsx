@@ -7,6 +7,7 @@ import navigationHamburger from "../../assets/navigationHamburger.svg";
 import searchSVG from "../../assets/search.svg";
 import settingsSVG from "../../assets/settings.svg";
 import notificationSVG from "../../assets/notification.svg";
+import "./NavBar.scss";
 
 interface NavbarProps {
   userImage: string;
@@ -35,7 +36,11 @@ const Navbar: React.FC<NavbarProps> = ({ userImage, onSearch }) => {
                 className="h-5 w-5"
               />
             </button>
-            <div className="navbar-title text-xl font-semibold text-gray-800">
+            <div
+              className={`navbar-title ${
+                isFlyoutOpen ? "flyout-open" : ""
+              } text-xl font-semibold text-gray-800`}
+            >
               {getPageTitleByPathName(pathname)}
             </div>
             <img
