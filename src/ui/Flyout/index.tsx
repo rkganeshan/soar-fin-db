@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useGlobalContext } from "../../context";
 import { useCurrentURL } from "../../hooks";
 import { routerPath } from "../../constants";
 import FlyoutHeader from "../../assets/flyoutHeader.svg?react";
@@ -19,6 +20,7 @@ interface FlyoutMenuProps {
 }
 
 const FlyoutMenu: React.FC<FlyoutMenuProps> = ({ isOpen, onClose }) => {
+  const { isFlyoutOpen } = useGlobalContext();
   const { pathname } = useCurrentURL();
   const navigate = useNavigate();
 
@@ -26,6 +28,9 @@ const FlyoutMenu: React.FC<FlyoutMenuProps> = ({ isOpen, onClose }) => {
     onClose();
     navigate(to);
   };
+  if (!isFlyoutOpen) {
+    return <></>;
+  }
 
   return (
     <div
@@ -43,7 +48,17 @@ const FlyoutMenu: React.FC<FlyoutMenuProps> = ({ isOpen, onClose }) => {
           aria-label="Close menu"
         >
           <FlyoutHeader className="h-5 w-5 mr-2" />
-          <h2 className="text-lg font-semibold" style={{ color: "#343C6A" }}>
+          <h2
+            className="flyout-head-text text-lg font-semibold"
+            style={{ color: "#343C6A" }}
+            tabIndex={0}
+            onKeyDown={(event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                onClose();
+              }
+            }}
+          >
             Soar Task
           </h2>
         </div>
@@ -59,6 +74,13 @@ const FlyoutMenu: React.FC<FlyoutMenuProps> = ({ isOpen, onClose }) => {
               aria-current={
                 pathname == routerPath.DASHBOARD.ROUTE ? "page" : undefined
               }
+              tabIndex={0}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  handleNavigate(routerPath.DASHBOARD.ROUTE);
+                }
+              }}
             >
               <DashboardIcon
                 className="h-5 w-5 mr-4"
@@ -81,6 +103,13 @@ const FlyoutMenu: React.FC<FlyoutMenuProps> = ({ isOpen, onClose }) => {
               aria-current={
                 pathname == routerPath.TRANSACTIONS.ROUTE ? "page" : undefined
               }
+              tabIndex={0}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  handleNavigate(routerPath.TRANSACTIONS.ROUTE);
+                }
+              }}
             >
               <Transactions
                 className="h-5 w-5 mr-4"
@@ -103,6 +132,13 @@ const FlyoutMenu: React.FC<FlyoutMenuProps> = ({ isOpen, onClose }) => {
               aria-current={
                 pathname == routerPath.ACCOUNTS.ROUTE ? "page" : undefined
               }
+              tabIndex={0}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  handleNavigate(routerPath.ACCOUNTS.ROUTE);
+                }
+              }}
             >
               <Accounts
                 className="h-5 w-5 mr-4"
@@ -125,6 +161,13 @@ const FlyoutMenu: React.FC<FlyoutMenuProps> = ({ isOpen, onClose }) => {
               aria-current={
                 pathname == routerPath.INVESTMENTS.ROUTE ? "page" : undefined
               }
+              tabIndex={0}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  handleNavigate(routerPath.INVESTMENTS.ROUTE);
+                }
+              }}
             >
               <Investments
                 className="h-5 w-5 mr-4"
@@ -147,6 +190,13 @@ const FlyoutMenu: React.FC<FlyoutMenuProps> = ({ isOpen, onClose }) => {
               aria-current={
                 pathname == routerPath.CREDIT_CARD.ROUTE ? "page" : undefined
               }
+              tabIndex={0}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  handleNavigate(routerPath.CREDIT_CARD.ROUTE);
+                }
+              }}
             >
               <CreditCard
                 className="h-5 w-5 mr-4"
@@ -169,6 +219,13 @@ const FlyoutMenu: React.FC<FlyoutMenuProps> = ({ isOpen, onClose }) => {
               aria-current={
                 pathname == routerPath.LOANS.ROUTE ? "page" : undefined
               }
+              tabIndex={0}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  handleNavigate(routerPath.LOANS.ROUTE);
+                }
+              }}
             >
               <Loans
                 className="h-5 w-5 mr-4"
@@ -189,6 +246,13 @@ const FlyoutMenu: React.FC<FlyoutMenuProps> = ({ isOpen, onClose }) => {
               aria-current={
                 pathname == routerPath.SERVICES.ROUTE ? "page" : undefined
               }
+              tabIndex={0}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  handleNavigate(routerPath.SERVICES.ROUTE);
+                }
+              }}
             >
               <Services
                 className="h-5 w-5 mr-4"
@@ -211,6 +275,13 @@ const FlyoutMenu: React.FC<FlyoutMenuProps> = ({ isOpen, onClose }) => {
               aria-current={
                 pathname == routerPath.MY_PRIVILEGES.ROUTE ? "page" : undefined
               }
+              tabIndex={0}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  handleNavigate(routerPath.MY_PRIVILEGES.ROUTE);
+                }
+              }}
             >
               <MyPrivileges
                 className="h-5 w-5 mr-4"
@@ -233,6 +304,13 @@ const FlyoutMenu: React.FC<FlyoutMenuProps> = ({ isOpen, onClose }) => {
               aria-current={
                 pathname == routerPath.SETTINGS.ROUTE ? "page" : undefined
               }
+              tabIndex={0}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  handleNavigate(routerPath.SETTINGS.ROUTE);
+                }
+              }}
             >
               <Settings
                 className="h-5 w-5 mr-4"
