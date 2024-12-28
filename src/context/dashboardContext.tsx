@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext } from "react";
+import { createContext, ReactNode, useCallback, useContext } from "react";
 import { useFetchData } from "../hooks/useFetchData";
 import { Card } from "../types/Card";
 import { CategoryData } from "../types/CategoryData";
@@ -39,23 +39,29 @@ export const useDashboardContext = () => {
 export const DashboardProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
+  /* Modify the transfer list data to append profile picture,
+   * in an ideal scenario, imageUrl would be sent response. */
+  const prepareImgsForQuickTransferRecipient = useCallback(
+    (dashboardData: DashboardAPIData) => ({
+      ...dashboardData,
+      transfer: dashboardData?.transfer.map((recipient) => ({
+        ...recipient,
+        profilePic:
+          userProfilePicMock[recipient.name as keyof typeof userProfilePicMock],
+      })),
+    }),
+    []
+  );
+
   const {
     isLoading: isLoadingDashboard,
     isError: isErrorDashboard,
     isSuccess: isSuccessDashboard,
     data: dashboardData,
-  } = useFetchData<DashboardAPIData>(API_ROUTES.getDashboard);
-
-  // Modify the transfer list data to append profile picture,
-  // in an ideal scenario, imageUrl would be sent
-  // the recepient in the response.
-  dashboardData?.transfer.forEach((recipient) => {
-    return {
-      ...recipient,
-      profilePic:
-        userProfilePicMock[recipient.name as keyof typeof userProfilePicMock],
-    };
-  });
+  } = useFetchData<DashboardAPIData>(
+    API_ROUTES.getDashboard,
+    prepareImgsForQuickTransferRecipient
+  );
 
   return (
     <DashboardContext.Provider
