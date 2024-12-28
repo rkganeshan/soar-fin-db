@@ -1,4 +1,10 @@
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1025px) and (max-width: 1190px) {
+  .line-chart-container {
+    height: 300px;
+  }
+}
+
+@media screen and (min-width: 1191px) {
   .line-chart-container {
     height: 276px;
   }

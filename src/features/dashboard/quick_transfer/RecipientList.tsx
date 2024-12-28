@@ -8,7 +8,9 @@ interface RecipientList {
   visibleUsers: Recipient[] | null;
   isDefaultAllUsersInView: UsersInView;
   isShowingAll: boolean;
+  selectedRecipient: Recipient | null;
   setIsShowingAll: React.Dispatch<SetStateAction<boolean>>;
+  setSelectedRecipient: React.Dispatch<SetStateAction<Recipient | null>>;
 }
 
 const RecipientsList = ({
@@ -16,7 +18,9 @@ const RecipientsList = ({
   visibleUsers,
   isDefaultAllUsersInView,
   isShowingAll,
+  selectedRecipient,
   setIsShowingAll,
+  setSelectedRecipient,
 }: RecipientList) => {
   const renderShowToggleBtn = () => {
     if (
@@ -43,7 +47,22 @@ const RecipientsList = ({
       } ${scrollStyleClasses}`}
     >
       {visibleUsers?.map((user, index) => (
-        <div key={index} className="user">
+        <div
+          key={index}
+          className={`user ${
+            user.name === selectedRecipient?.name ? "font-bold" : ""
+          }`}
+          onClick={() => {
+            if (user.name === selectedRecipient?.name) {
+              setSelectedRecipient(null);
+            } else {
+              setSelectedRecipient(user);
+            }
+          }}
+          onBlur={() => {
+            setSelectedRecipient(null);
+          }}
+        >
           <img
             src={user.profilePic}
             alt={user.name}

@@ -11,6 +11,11 @@ const QuickTransfer: React.FC = () => {
   const { isLoadingDashboard, isSuccessDashboard, recipients } =
     useDashboardContext();
 
+  // Selected user for quick transfer
+  const [selectedRecipient, setSelectedRecipient] = useState<Recipient | null>(
+    null
+  );
+
   // If all users are visible by default, we should not show the toggle at all.
   const [isDefaultAllUsersInView, setIsDefaultAllUsersInView] =
     useState<UsersInView>(UsersInView.UNKNOWN);
@@ -78,10 +83,15 @@ const QuickTransfer: React.FC = () => {
               recipients={recipients}
               isDefaultAllUsersInView={isDefaultAllUsersInView}
               isShowingAll={isShowingAll}
-              setIsShowingAll={setIsShowingAll}
               visibleUsers={visibleUsers}
+              selectedRecipient={selectedRecipient}
+              setIsShowingAll={setIsShowingAll}
+              setSelectedRecipient={setSelectedRecipient}
             />
-            <AmountInputAndTransfer />
+            <AmountInputAndTransfer
+              recipient={selectedRecipient}
+              setSelectedRecipient={setSelectedRecipient}
+            />
           </>
         )}
       </div>
