@@ -55,6 +55,7 @@ const RecipientsList = ({
           className={`show-more-btn shadow-md ${
             isShowingAll ? "show-less" : "show-more"
           }`}
+          aria-label={isShowingAll ? "Show Less Users" : "Show More Users"}
         >
           <span className="users-slider arrow">{isShowingAll ? "<" : ">"}</span>
         </div>
@@ -63,9 +64,11 @@ const RecipientsList = ({
   };
   return (
     <div
-      className={`users-container  ${
+      className={`users-container ${
         isShowingAll ? "overflow-x-auto" : "overflow-x-hidden"
       } ${scrollStyleClasses}`}
+      aria-live="polite"
+      aria-label="Recipients List"
     >
       {visibleUsers?.map((user, index) => (
         <div
@@ -94,6 +97,7 @@ const RecipientsList = ({
               setSelectedRecipient(null);
             }
           }}
+          aria-label={`Recipient ${user.name}`}
         >
           <LazyImage
             image={{
@@ -103,8 +107,12 @@ const RecipientsList = ({
             }}
           />
           <div className="user-info text-center">
-            <div className="user-name">{user.name}</div>
-            <div className="user-role">{user.role}</div>
+            <div className="user-name" aria-label={`Name: ${user.name}`}>
+              {user.name}
+            </div>
+            <div className="user-role" aria-label={`Role: ${user.role}`}>
+              {user.role}
+            </div>
           </div>
         </div>
       ))}

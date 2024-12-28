@@ -8,6 +8,7 @@ interface AmountInputAndTransferProps {
   recipient: Recipient | null;
   setSelectedRecipient: React.Dispatch<SetStateAction<Recipient | null>>;
 }
+
 const AmountInputAndTransfer = ({
   recipient,
   setSelectedRecipient,
@@ -51,8 +52,13 @@ const AmountInputAndTransfer = ({
 
   return (
     <>
-      <div className={`transfer-section mt-8 flex items-center space-x-4`}>
-        <span className="write-amount">Write Amount</span>
+      <div
+        className={`transfer-section mt-8 flex items-center space-x-4`}
+        aria-live="polite"
+      >
+        <span className="write-amount" aria-label="Write Amount">
+          Write Amount
+        </span>
         <div className="input-container">
           <input
             type="text"
@@ -61,11 +67,13 @@ const AmountInputAndTransfer = ({
             onChange={handleAmountChange}
             onBlur={handleBlur}
             className="amount-input"
+            aria-label="Amount Input"
           />
           <button
             className="send-btn"
             onClick={handleSend}
             disabled={isSendBtnDisabled}
+            aria-label="Send Button"
           >
             {fakeTransferring ? (
               <>Sending...</>
@@ -78,6 +86,7 @@ const AmountInputAndTransfer = ({
                     width: "26px",
                     height: "22.6px",
                   }}
+                  alt="Send Icon"
                 />
               </>
             )}
@@ -85,7 +94,10 @@ const AmountInputAndTransfer = ({
         </div>
       </div>
       {helperText && (
-        <div className="text-red-500 text-sm mt-2 text-left w-full">
+        <div
+          className="text-red-500 text-sm mt-2 text-left w-full"
+          aria-live="assertive"
+        >
           {helperText}
         </div>
       )}

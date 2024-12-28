@@ -19,8 +19,11 @@ const InputField: React.FC<InputFieldProps> = ({
 }) => {
   return (
     <div>
-      <label className="block mb-2">{label}</label>
+      <label className="block mb-2" htmlFor={name}>
+        {label}
+      </label>
       <input
+        id={name}
         name={name}
         type={type}
         className={`w-full p-2 pl-3 border rounded-2xl ${
@@ -31,9 +34,13 @@ const InputField: React.FC<InputFieldProps> = ({
         value={value}
         onChange={onChange}
         spellCheck="false"
+        aria-describedby={helperText ? `${name}-helper-text` : undefined}
+        aria-invalid={helperText ? "true" : undefined}
       />
       {helperText && (
-        <span className="text-red-500 text-sm mt-1">{helperText}</span>
+        <span id={`${name}-helper-text`} className="text-red-500 text-sm mt-1">
+          {helperText}
+        </span>
       )}
     </div>
   );

@@ -15,6 +15,8 @@ const Layout = () => {
       className={`layout-container transition-transform duration-300 ${
         isFlyoutOpen ? "md:ml-64" : ""
       } h-full flex flex-col`}
+      aria-live="polite"
+      aria-busy={isFlyoutOpen ? "true" : "false"}
     >
       <Navbar userImage={currentUser} onSearch={(_) => {}} />
       <div
@@ -28,6 +30,7 @@ const Layout = () => {
             toggleFlyout();
           }
         }}
+        aria-hidden={isFlyoutOpen ? "true" : "false"}
       >
         <div className={`content-wrapper ${isFlyoutOpen ? "" : "lg:ml-12"}`}>
           <Outlet />

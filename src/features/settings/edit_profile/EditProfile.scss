@@ -40,6 +40,7 @@
   .save-container {
     .save-btn {
       width: 100%;
+      outline: none;
 
       &:disabled {
         background-color: #474646;
@@ -50,6 +51,11 @@
         background-color: #3a3838;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       }
+    }
+    
+    .save-btn:focus {
+      outline: 2px solid #e0e0e2;
+      outline-offset: -5px;
     }
   }
 }
