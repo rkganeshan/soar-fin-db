@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { useToast } from "../../../../context";
 import { useSettingsContext } from "../../../../context/settingsContext";
+import LazyImage from "../../../../ui/LazyImage";
 import {
   getBase64FromFile,
   handleImageUpload,
@@ -53,10 +54,13 @@ const ProfilePicture = () => {
   return (
     <div className="profile-picture relative mb-6 lg:mb-0 lg:pl-5">
       <div className="profile-box">
-        <img
-          className="profile-img rounded-full relative"
-          src={previewUrl || CurrentUser}
-          alt="Profile"
+        <LazyImage
+          image={{
+            alt: "Profile",
+            src: previewUrl || CurrentUser,
+            className: "profile-img rounded-full relative",
+            transitionDelay: "1s",
+          }}
         />
         <input
           type="file"
