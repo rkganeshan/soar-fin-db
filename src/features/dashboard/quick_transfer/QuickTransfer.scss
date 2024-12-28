@@ -122,6 +122,7 @@
         justify-content: center;
         transition: background-color 0.3s;
         border-radius: 2rem;
+        outline: none;
 
         &:hover {
           background-color: #333;
@@ -136,6 +137,11 @@
           width: 20px;
           height: 20px;
         }
+      }
+
+      .send-btn:focus {
+        outline: 2px solid #e0e0e2;
+        outline-offset: -5px;
       }
     }
   }

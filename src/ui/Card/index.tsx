@@ -16,8 +16,8 @@ const Card = forwardRef<HTMLElement, CardProps>(
   ({ balance, cardHolder, validThru, cardNumber, theme }, ref) => {
     const cardClass =
       theme === "dark"
-        ? "bg-gradient-to-r from-gray-800 to-black text-white"
-        : "bg-white text-black";
+        ? "card-dark bg-gradient-to-r from-gray-800 to-black text-white"
+        : "card-light bg-white text-black";
     const balanceTextClass =
       theme === "dark" ? "text-gray-300" : "text-gray-600";
 
@@ -25,6 +25,7 @@ const Card = forwardRef<HTMLElement, CardProps>(
       <div
         ref={ref as LegacyRef<HTMLDivElement>}
         className={`card rounded-2xl shadow ${cardClass} w-full`}
+        tabIndex={0}
       >
         <div className="card-header p-4 flex justify-between items-start">
           <div className={`card-balance`}>

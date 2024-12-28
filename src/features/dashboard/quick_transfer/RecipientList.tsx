@@ -23,6 +23,13 @@ const RecipientsList = ({
   setIsShowingAll,
   setSelectedRecipient,
 }: RecipientList) => {
+  const handleSelectRecipient = (user: Recipient) => {
+    if (user.name === selectedRecipient?.name) {
+      setSelectedRecipient(null);
+    } else {
+      setSelectedRecipient(user);
+    }
+  };
   const renderShowToggleBtn = () => {
     if (
       recipients &&
@@ -31,7 +38,20 @@ const RecipientsList = ({
     ) {
       return (
         <div
+          tabIndex={0}
           onClick={() => setIsShowingAll((prev) => !prev)}
+          onKeyDown={(event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault(); // Prevent default scroll behavior for space
+              setIsShowingAll((prev) => !prev);
+            } else if (event.key === "Tab" && !isShowingAll) {
+              event.preventDefault(); // Prevent default Tab behavior
+              const firstUserElement = document.querySelector(".user");
+              if (firstUserElement) {
+                (firstUserElement as HTMLDivElement).focus(); // Shift focus to the first .user element
+              }
+            }
+          }}
           className={`show-more-btn shadow-md ${
             isShowingAll ? "show-less" : "show-more"
           }`}
@@ -53,15 +73,26 @@ const RecipientsList = ({
           className={`user ${
             user.name === selectedRecipient?.name ? "font-bold" : ""
           }`}
-          onClick={() => {
-            if (user.name === selectedRecipient?.name) {
-              setSelectedRecipient(null);
-            } else {
-              setSelectedRecipient(user);
+          tabIndex={0}
+          onKeyDown={(event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault(); // Prevent default scroll behavior for space
+              handleSelectRecipient(user);
+              const amountInput = document.querySelector(".amount-input");
+              if (amountInput) {
+                (amountInput as HTMLDivElement).focus(); // Shift focus to the first .user element
+              }
             }
           }}
-          onBlur={() => {
-            setSelectedRecipient(null);
+          onClick={() => handleSelectRecipient(user)}
+          onBlur={(event) => {
+            // Check if the blur event is caused by focusing another `user` element
+            if (
+              !event.relatedTarget ||
+              !event.relatedTarget.classList.contains("amount-input")
+            ) {
+              setSelectedRecipient(null);
+            }
           }}
         >
           <LazyImage
