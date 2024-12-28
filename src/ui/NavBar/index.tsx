@@ -1,12 +1,15 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { useGlobalContext } from "../../context";
 import { useCurrentURL } from "../../hooks";
 import { getPageTitleByPathName } from "../../utils";
-import FlyoutMenu from "../Flyout";
+import LazyImage from "../LazyImage";
 import navigationHamburger from "../../assets/navigationHamburger.svg";
 import searchSVG from "../../assets/search.svg";
 import settingsSVG from "../../assets/settings.svg";
 import notificationSVG from "../../assets/notification.svg";
+import "./NavBar.scss";
+
+const FlyoutMenu = lazy(() => import("../Flyout"));
 
 interface NavbarProps {
   userImage: string;
@@ -28,20 +31,31 @@ const Navbar: React.FC<NavbarProps> = ({ userImage, onSearch }) => {
                 isFlyoutOpen ? "md:hidden" : ""
               }`}
               onClick={toggleFlyout}
+              aria-label="Toggle navigation menu"
+              aria-expanded={isFlyoutOpen}
             >
-              <img
-                src={navigationHamburger}
-                alt="navigation"
-                className="h-5 w-5"
+              <LazyImage
+                image={{
+                  alt: "Navigation",
+                  src: navigationHamburger,
+                  className: "h-5 w-5",
+                }}
               />
             </button>
-            <div className="navbar-title text-xl font-semibold text-gray-800">
+            <div
+              className={`navbar-title ${
+                isFlyoutOpen ? "flyout-open" : ""
+              } text-xl font-semibold text-gray-800`}
+              aria-live="polite"
+              aria-atomic="true"
+            >
               {getPageTitleByPathName(pathname)}
             </div>
             <img
               src={userImage}
               alt="User"
               className="navbar-user-image w-10 h-10 rounded-full md:hidden"
+              aria-hidden="true"
             />
           </div>
           <div className="navbar-search md:hidden flex justify-center mt-4">
@@ -51,6 +65,7 @@ const Navbar: React.FC<NavbarProps> = ({ userImage, onSearch }) => {
                 placeholder="Search for something"
                 className="navbar-search-input w-full pl-10 pr-4 py-2 rounded-full bg-gray-100 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                 onChange={(e) => onSearch(e.target.value)}
+                aria-label="Search"
               />
               <div className="navbar-search-icon absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <img src={searchSVG} alt="Search Icon" className="h-5 w-5" />
@@ -64,26 +79,38 @@ const Navbar: React.FC<NavbarProps> = ({ userImage, onSearch }) => {
                 placeholder="Search for something"
                 className="navbar-search-input pl-10 pr-4 py-2 rounded-full bg-gray-100 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                 onChange={(e) => onSearch(e.target.value)}
+                aria-label="Search"
               />
               <div className="navbar-search-icon absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <img src={searchSVG} alt="Search Icon" className="h-5 w-5" />
               </div>
             </div>
-            <button className="navbar-settings p-2 rounded-full bg-gray-100 hover:bg-gray-200">
+            <button
+              className="navbar-settings p-2 rounded-full bg-gray-100 hover:bg-gray-200"
+              aria-label="Settings"
+            >
               <img src={settingsSVG} alt="Settings Icon" />
             </button>
-            <button className="navbar-notifications p-2 rounded-full bg-gray-100 hover:bg-gray-200">
+            <button
+              className="navbar-notifications p-2 rounded-full bg-gray-100 hover:bg-gray-200"
+              aria-label="Notifications"
+            >
               <img src={notificationSVG} alt="Notification Icon" />
             </button>
-            <img
-              src={userImage}
-              alt="User"
-              className="navbar-user-image w-10 h-10 rounded-full"
+            <LazyImage
+              image={{
+                alt: "User",
+                src: userImage,
+                className: "navbar-user-image w-10 h-10 rounded-full",
+                transitionDelay: "1s",
+              }}
             />
           </div>
         </div>
       </div>
-      <FlyoutMenu isOpen={isFlyoutOpen} onClose={toggleFlyout} />
+      <Suspense fallback={<></>}>
+        <FlyoutMenu isOpen={isFlyoutOpen} onClose={toggleFlyout} />
+      </Suspense>
     </>
   );
 };

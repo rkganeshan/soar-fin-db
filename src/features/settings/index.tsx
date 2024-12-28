@@ -17,13 +17,22 @@ const Settings: React.FC = () => {
   };
 
   return (
-    <div className="settings-page bg-white h-auto rounded-2xl shadow px-8 py-4 pb-8 mt-2">
-      <Tabs />
-      <div className="tab-content-wrapper">
+    <div
+      className="settings-page bg-white h-auto rounded-2xl shadow px-8 py-4 pb-8 mt-2"
+      aria-live="polite"
+      aria-label="Settings Page"
+    >
+      <Tabs aria-label="Settings Tabs" />
+      <div
+        className="tab-content-wrapper"
+        aria-live="polite"
+        aria-label="Tab Content"
+      >
         {settingsTabs.map((tab) => (
           <div
             key={tab.key}
             className={`tab-content ${getTransitionClass(activeTab, tab.key)}`}
+            aria-hidden={activeTab !== tab.key}
           >
             {activeTab === tab.key && (
               <>

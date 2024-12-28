@@ -7,7 +7,7 @@ import currentUser from "../../assets/currentUser.svg";
 import "../globalStyles.scss";
 
 const Layout = () => {
-  const { isFlyoutOpen } = useGlobalContext();
+  const { isFlyoutOpen, toggleFlyout } = useGlobalContext();
   const { pathname } = useCurrentURL();
 
   return (
@@ -15,6 +15,8 @@ const Layout = () => {
       className={`layout-container transition-transform duration-300 ${
         isFlyoutOpen ? "md:ml-64" : ""
       } h-full flex flex-col`}
+      aria-live="polite"
+      aria-busy={isFlyoutOpen ? "true" : "false"}
     >
       <Navbar userImage={currentUser} onSearch={(_) => {}} />
       <div
@@ -23,10 +25,14 @@ const Layout = () => {
             ? "bg-gray-100"
             : "md:bg-gray-100"
         } flex-grow`}
+        onClick={() => {
+          if (isFlyoutOpen) {
+            toggleFlyout();
+          }
+        }}
+        aria-hidden={isFlyoutOpen ? "true" : "false"}
       >
-        <div
-          className={`content-wrapper ${isFlyoutOpen ? "ml-4" : "lg:ml-12"}`}
-        >
+        <div className={`content-wrapper ${isFlyoutOpen ? "" : "lg:ml-12"}`}>
           <Outlet />
         </div>
       </div>

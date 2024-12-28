@@ -22,7 +22,7 @@ const Transaction: React.FC<TransactionProps> = ({
 
   return (
     <>
-      <div className="flex items-start space-x-4">
+      <div className="flex items-start space-x-4" role="listitem" tabIndex={0}>
         <div
           className="transaction-icon flex items-center bg-gray-200 p-2 rounded-full"
           style={{
@@ -32,10 +32,11 @@ const Transaction: React.FC<TransactionProps> = ({
               ? "#FFF5D9"
               : "#DCFAF8",
           }}
+          aria-hidden="true"
         >
           <img
             src={source ? Paypal : type === "debit" ? DebitFromCard : Deposit}
-            alt={title}
+            alt="Transaction Image"
           />
         </div>
         <div className="transaction-details flex-grow">

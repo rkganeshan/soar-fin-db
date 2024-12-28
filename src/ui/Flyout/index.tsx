@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useGlobalContext } from "../../context";
 import { useCurrentURL } from "../../hooks";
 import { routerPath } from "../../constants";
 import FlyoutHeader from "../../assets/flyoutHeader.svg?react";
@@ -19,31 +20,66 @@ interface FlyoutMenuProps {
 }
 
 const FlyoutMenu: React.FC<FlyoutMenuProps> = ({ isOpen, onClose }) => {
+  const { isFlyoutOpen } = useGlobalContext();
   const { pathname } = useCurrentURL();
   const navigate = useNavigate();
+
+  const handleNavigate = (to: string) => {
+    onClose();
+    navigate(to);
+  };
+  if (!isFlyoutOpen) {
+    return <></>;
+  }
 
   return (
     <div
       className={`flyout-menu fixed inset-y-0 left-0 transition-transform duration-300 z-50 ${
         isOpen ? "translate-x-0" : "-translate-x-full"
       }`}
+      aria-hidden={!isOpen}
+      aria-label="Flyout menu"
     >
       <div className="flyout-content bg-white w-64 sm:w-full md:w-64 lg:w-64 xl:w-64 max-w-xs h-full shadow-lg">
         <div
           className="flyout-header p-6 flex items-center space-x-2 cursor-pointer"
           onClick={onClose}
+          role="button"
+          aria-label="Close menu"
         >
           <FlyoutHeader className="h-5 w-5 mr-2" />
-          <h2 className="text-lg font-semibold" style={{ color: "#343C6A" }}>
+          <h2
+            className="flyout-head-text text-lg font-semibold"
+            style={{ color: "#343C6A" }}
+            tabIndex={0}
+            onKeyDown={(event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                onClose();
+              }
+            }}
+          >
             Soar Task
           </h2>
         </div>
         <div className="flyout-body p-4">
-          <ul>
+          <ul role="menu">
             <li
               className="flyout-item flex items-center p-2 cursor-pointer"
               onClick={() => {
-                navigate(routerPath.DASHBOARD.ROUTE);
+                handleNavigate(routerPath.DASHBOARD.ROUTE);
+              }}
+              role="menuitem"
+              aria-label="Dashboard"
+              aria-current={
+                pathname == routerPath.DASHBOARD.ROUTE ? "page" : undefined
+              }
+              tabIndex={0}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  handleNavigate(routerPath.DASHBOARD.ROUTE);
+                }
               }}
             >
               <DashboardIcon
@@ -60,7 +96,19 @@ const FlyoutMenu: React.FC<FlyoutMenuProps> = ({ isOpen, onClose }) => {
             <li
               className="flyout-item flex items-center p-2 cursor-pointer"
               onClick={() => {
-                navigate(routerPath.TRANSACTIONS.ROUTE);
+                handleNavigate(routerPath.TRANSACTIONS.ROUTE);
+              }}
+              role="menuitem"
+              aria-label="Transactions"
+              aria-current={
+                pathname == routerPath.TRANSACTIONS.ROUTE ? "page" : undefined
+              }
+              tabIndex={0}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  handleNavigate(routerPath.TRANSACTIONS.ROUTE);
+                }
               }}
             >
               <Transactions
@@ -77,7 +125,19 @@ const FlyoutMenu: React.FC<FlyoutMenuProps> = ({ isOpen, onClose }) => {
             <li
               className="flyout-item flex items-center p-2 cursor-pointer"
               onClick={() => {
-                navigate(routerPath.ACCOUNTS.ROUTE);
+                handleNavigate(routerPath.ACCOUNTS.ROUTE);
+              }}
+              role="menuitem"
+              aria-label="Accounts"
+              aria-current={
+                pathname == routerPath.ACCOUNTS.ROUTE ? "page" : undefined
+              }
+              tabIndex={0}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  handleNavigate(routerPath.ACCOUNTS.ROUTE);
+                }
               }}
             >
               <Accounts
@@ -94,7 +154,19 @@ const FlyoutMenu: React.FC<FlyoutMenuProps> = ({ isOpen, onClose }) => {
             <li
               className="flyout-item flex items-center p-2 cursor-pointer"
               onClick={() => {
-                navigate(routerPath.INVESTMENTS.ROUTE);
+                handleNavigate(routerPath.INVESTMENTS.ROUTE);
+              }}
+              role="menuitem"
+              aria-label="Investments"
+              aria-current={
+                pathname == routerPath.INVESTMENTS.ROUTE ? "page" : undefined
+              }
+              tabIndex={0}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  handleNavigate(routerPath.INVESTMENTS.ROUTE);
+                }
               }}
             >
               <Investments
@@ -111,7 +183,19 @@ const FlyoutMenu: React.FC<FlyoutMenuProps> = ({ isOpen, onClose }) => {
             <li
               className="flyout-item flex items-center p-2 cursor-pointer"
               onClick={() => {
-                navigate(routerPath.CREDIT_CARD.ROUTE);
+                handleNavigate(routerPath.CREDIT_CARD.ROUTE);
+              }}
+              role="menuitem"
+              aria-label="Credit Cards"
+              aria-current={
+                pathname == routerPath.CREDIT_CARD.ROUTE ? "page" : undefined
+              }
+              tabIndex={0}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  handleNavigate(routerPath.CREDIT_CARD.ROUTE);
+                }
               }}
             >
               <CreditCard
@@ -128,7 +212,19 @@ const FlyoutMenu: React.FC<FlyoutMenuProps> = ({ isOpen, onClose }) => {
             <li
               className="flyout-item flex items-center p-2 cursor-pointer"
               onClick={() => {
-                navigate(routerPath.LOANS.ROUTE);
+                handleNavigate(routerPath.LOANS.ROUTE);
+              }}
+              role="menuitem"
+              aria-label="Loans"
+              aria-current={
+                pathname == routerPath.LOANS.ROUTE ? "page" : undefined
+              }
+              tabIndex={0}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  handleNavigate(routerPath.LOANS.ROUTE);
+                }
               }}
             >
               <Loans
@@ -143,7 +239,19 @@ const FlyoutMenu: React.FC<FlyoutMenuProps> = ({ isOpen, onClose }) => {
             <li
               className="flyout-item flex items-center p-2 cursor-pointer"
               onClick={() => {
-                navigate(routerPath.SERVICES.ROUTE);
+                handleNavigate(routerPath.SERVICES.ROUTE);
+              }}
+              role="menuitem"
+              aria-label="Services"
+              aria-current={
+                pathname == routerPath.SERVICES.ROUTE ? "page" : undefined
+              }
+              tabIndex={0}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  handleNavigate(routerPath.SERVICES.ROUTE);
+                }
               }}
             >
               <Services
@@ -160,7 +268,19 @@ const FlyoutMenu: React.FC<FlyoutMenuProps> = ({ isOpen, onClose }) => {
             <li
               className="flyout-item flex items-center p-2 cursor-pointer"
               onClick={() => {
-                navigate(routerPath.MY_PRIVILEGES.ROUTE);
+                handleNavigate(routerPath.MY_PRIVILEGES.ROUTE);
+              }}
+              role="menuitem"
+              aria-label="My Privileges"
+              aria-current={
+                pathname == routerPath.MY_PRIVILEGES.ROUTE ? "page" : undefined
+              }
+              tabIndex={0}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  handleNavigate(routerPath.MY_PRIVILEGES.ROUTE);
+                }
               }}
             >
               <MyPrivileges
@@ -177,7 +297,19 @@ const FlyoutMenu: React.FC<FlyoutMenuProps> = ({ isOpen, onClose }) => {
             <li
               className="flyout-item flex items-center p-2 cursor-pointer"
               onClick={() => {
-                navigate(routerPath.SETTINGS.ROUTE);
+                handleNavigate(routerPath.SETTINGS.ROUTE);
+              }}
+              role="menuitem"
+              aria-label="Settings"
+              aria-current={
+                pathname == routerPath.SETTINGS.ROUTE ? "page" : undefined
+              }
+              tabIndex={0}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  handleNavigate(routerPath.SETTINGS.ROUTE);
+                }
               }}
             >
               <Settings

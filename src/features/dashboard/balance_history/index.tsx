@@ -18,19 +18,39 @@ const BalanceHistory: React.FC = () => {
 
   const renderLineChartSection = () => {
     if (isLoadingDashboard) {
-      return <Spinner expand={false} />;
+      return (
+        <Spinner
+          expand={false}
+          aria-live="polite"
+          aria-label="Loading spinner"
+        />
+      );
     }
     if (!isErrorDashboard) {
-      return <Line data={lineChartData} options={lineChartOptions} />;
+      return (
+        <Line
+          data={lineChartData}
+          options={lineChartOptions}
+          aria-label="Balance History Line Chart"
+        />
+      );
     }
   };
 
   return (
-    <div className="balance-history">
-      <h2 className="text-lg font-semibold mb-4" style={{ color: "#343C6A" }}>
+    <div className="balance-history" aria-live="polite">
+      <h2
+        className="text-lg font-semibold mb-4"
+        style={{ color: "#343C6A" }}
+        aria-label="Balance History Heading"
+      >
         Balance History
       </h2>
-      <div className="line-chart-container bg-white rounded-lg shadow px-8 pt-4">
+      <div
+        className="line-chart-container bg-white rounded-lg shadow px-8 pt-4"
+        aria-live="polite"
+        aria-label="Line Chart Container"
+      >
         {renderLineChartSection()}
       </div>
     </div>

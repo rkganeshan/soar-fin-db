@@ -1,5 +1,9 @@
 const Loans = () => {
-  return <>Loans will be here soon.</>;
+  return (
+    <div aria-live="polite" aria-label="Loans Section">
+      Loans will be here soon.
+    </div>
+  );
 };
 
 export default Loans;

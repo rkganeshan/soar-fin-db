@@ -33,6 +33,7 @@ const Tabs = () => {
     <div
       ref={tabsRef}
       className="tabs flex justify-start mb-6 overflow-x-auto whitespace-nowrap"
+      role="tablist"
     >
       {settingsTabs.map((tab) => (
         <button
@@ -42,6 +43,10 @@ const Tabs = () => {
             activeTab === tab.key ? "active border-b-2 border-black" : ""
           }`}
           onClick={() => setActiveTab(tab.key)}
+          role="tab"
+          aria-selected={activeTab === tab.key}
+          aria-controls={`tabpanel-${tab.key}`}
+          id={`tab-${tab.key}`}
         >
           {tab.label}
         </button>

@@ -25,6 +25,7 @@ const ProfileForm = () => {
       name,
       value: formValues[name] as string,
       onChange: onInputChange,
+      "aria-label": label,
     };
 
     if (fieldType === FormFieldDataType.DatePicker) {
@@ -41,7 +42,10 @@ const ProfileForm = () => {
   };
 
   return (
-    <form className="profile-form grid grid-cols-1 lg:grid-cols-2 gap-6 flex-grow">
+    <form
+      className="profile-form grid grid-cols-1 lg:grid-cols-2 gap-6 flex-grow"
+      aria-label="Profile Form"
+    >
       {fields.map((field) => renderField(field))}
     </form>
   );
