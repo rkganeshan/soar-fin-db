@@ -1,9 +1,11 @@
+import { DailyData } from "./DailyData";
+
 export interface WeeklyData {
-  Sat: number;
-  Sun: number;
-  Mon: number;
-  Tue: number;
-  Wed: number;
-  Thu: number;
-  Fri: number;
+  Mon: DailyData;
+  Tue: DailyData;
+  Wed: DailyData;
+  Thu: DailyData;
+  Fri: DailyData;
+  Sat: DailyData;
+  Sun: DailyData;
 }
