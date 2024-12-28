@@ -1,10 +1,7 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
-import { Chart, registerables } from "chart.js";
 import "../../../utils/chartSetup";
 import "./BalanceHistory.scss";
-
-Chart.register(...registerables);
 
 const BalanceHistory: React.FC = () => {
   const data = {

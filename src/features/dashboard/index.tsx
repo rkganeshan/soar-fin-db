@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { useDashboardContext } from "../../context/dashboardContext";
 import MyCards from "./my_cards";
 import RecentTransactions from "./recent_transactions";
 import WeeklyActivity from "./weekly_activity";
@@ -8,6 +9,7 @@ import BalanceHistory from "./balance_history";
 import "./Dashboard.scss";
 
 const Dashboard: React.FC = () => {
+  const { isSuccessDashboard } = useDashboardContext();
   const myCardsRef = useRef<HTMLDivElement>(null);
   const recentTransactionsRef = useRef<HTMLElement>(null);
 
@@ -25,7 +27,7 @@ const Dashboard: React.FC = () => {
     return () => {
       window.removeEventListener("resize", adjustHeight);
     };
-  }, []);
+  }, [isSuccessDashboard]);
 
   return (
     <div className="dashboard-container md:bg-gray-100 h-full flex flex-col">

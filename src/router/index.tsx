@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { GlobalProvider, ToastProvider } from "../context";
+import { DashboardProvider } from "../context/dashboardContext";
 import { SettingsProvider } from "../context/settingsContext";
 import Dashboard from "../features/dashboard";
 import Settings from "../features/settings";
@@ -27,7 +28,14 @@ const AppRouter = () => {
             </GlobalProvider>
           }
         >
-          <Route index element={<Dashboard />} />
+          <Route
+            index
+            element={
+              <DashboardProvider>
+                <Dashboard />
+              </DashboardProvider>
+            }
+          />
           <Route
             path={routerPath.TRANSACTIONS.ROUTE}
             element={<Transactions />}
