@@ -15,7 +15,7 @@ interface DashboardContextType {
   isErrorDashboard: boolean;
   isSuccessDashboard: boolean;
   cards?: Card[];
-  transactions?: Transaction;
+  transactions?: Transaction[];
   weekly?: WeeklyData;
   statistics?: CategoryData;
   recipients?: Recipient[];

@@ -7,7 +7,7 @@ import { WeeklyData } from "./WeeklyData";
 
 export interface DashboardAPIData {
   cards: Card[];
-  transactions: Transaction;
+  transactions: Transaction[];
   weekly: WeeklyData;
   statistics: CategoryData;
   transfer: Recipient[];

@@ -5,7 +5,7 @@ const ShimmerCard = forwardRef<HTMLElement>((_, ref) => {
   return (
     <div
       ref={ref as LegacyRef<HTMLDivElement>}
-      className="shimmer-card rounded-2xl shadow bg-gray-200 w-full animate-pulse"
+      className="shimmer-card rounded-2xl shadow bg-gray-200 w-full card-animate-pulse"
     >
       <div className="shimmer-card-header p-4 flex justify-between items-start">
         <div className="shimmer-balance w-1/4 h-6 bg-gray-300 rounded"></div>
