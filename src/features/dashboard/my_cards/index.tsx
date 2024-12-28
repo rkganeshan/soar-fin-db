@@ -1,56 +1,14 @@
 import { forwardRef, useRef, useState } from "react";
+import { useDashboardContext } from "../../../context/dashboardContext";
 import Card from "../../../ui/Card";
+import ShimmerCard from "../../../ui/Card/ShimmerCard";
 import { scrollStyleClasses } from "../../../constants";
 
-interface CardProps {
-  balance: string;
-  cardHolder: string;
-  validThru: string;
-  cardNumber: string;
-  theme: "dark" | "light";
-}
-
 const MyCards = forwardRef<HTMLElement>((_, ref) => {
+  const { isLoadingDashboard, isSuccessDashboard, cards } =
+    useDashboardContext();
   const [showScroll, setShowScroll] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-
-  const cards: CardProps[] = [
-    {
-      balance: "$5,756",
-      cardHolder: "Eddy Cusuma",
-      validThru: "12/22",
-      cardNumber: "3778 **** **** 1234",
-      theme: "dark",
-    },
-    {
-      balance: "$5,756",
-      cardHolder: "Eddy Cusuma",
-      validThru: "12/22",
-      cardNumber: "3778 **** **** 1234",
-      theme: "light",
-    },
-    {
-      balance: "$5,756",
-      cardHolder: "Eddy Cusuma",
-      validThru: "12/22",
-      cardNumber: "3778 **** **** 1234",
-      theme: "dark",
-    },
-    {
-      balance: "$5,756",
-      cardHolder: "Eddy Cusuma",
-      validThru: "12/22",
-      cardNumber: "3778 **** **** 1234",
-      theme: "light",
-    },
-    {
-      balance: "$5,756",
-      cardHolder: "Eddy Cusuma",
-      validThru: "12/22",
-      cardNumber: "3778 **** **** 1234",
-      theme: "dark",
-    },
-  ];
 
   const smoothScroll = (element: HTMLElement, to: number, duration: number) => {
     if (!element) return;
@@ -89,19 +47,36 @@ const MyCards = forwardRef<HTMLElement>((_, ref) => {
     setShowScroll((prev) => !prev);
   };
 
+  const renderCardsShimmer = () => (
+    <>
+      <ShimmerCard ref={ref} />
+      <ShimmerCard />
+    </>
+  );
+
+  const renderCards = () => (
+    <>
+      {cards?.map((card, index) => (
+        <Card key={index} {...card} {...(index === 0 && { ref })} />
+      ))}
+    </>
+  );
+
   return (
     <div className="my-cards">
       <div className="flex justify-between items-center mb-2">
         <h2 className="text-lg font-semibold" style={{ color: "#343C6A" }}>
           My Cards
         </h2>
-        <div
-          className="text-blue-600 cursor-pointer font-semibold"
-          onClick={handleSeeAllClick}
-          style={{ color: "#343C6A" }}
-        >
-          {showScroll ? "See Less" : "See All"}
-        </div>
+        {isSuccessDashboard && (
+          <div
+            className="text-blue-600 cursor-pointer font-semibold"
+            onClick={handleSeeAllClick}
+            style={{ color: "#343C6A" }}
+          >
+            {showScroll ? "See Less" : "See All"}
+          </div>
+        )}
       </div>
       <div
         ref={containerRef}
@@ -109,9 +84,7 @@ const MyCards = forwardRef<HTMLElement>((_, ref) => {
           showScroll ? "overflow-x-auto" : "overflow-x-hidden"
         } ${scrollStyleClasses}`}
       >
-        {cards.map((card, index) => (
-          <Card key={index} {...card} {...(index === 0 && { ref })} />
-        ))}
+        {isLoadingDashboard ? renderCardsShimmer() : renderCards()}
       </div>
     </div>
   );

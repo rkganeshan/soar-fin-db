@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import axiosInstance from "../config/axiosInstance";
 
-export const useFetchData = <T>(url: string) => {
+export const useFetchData = <T>(url: string, select?: (data: T) => T) => {
   return useQuery<T, Error>(
     ["data", url],
     async () => {
@@ -11,6 +11,7 @@ export const useFetchData = <T>(url: string) => {
     {
       refetchOnWindowFocus: false,
       retry: false,
+      select
     }
   );
 };
