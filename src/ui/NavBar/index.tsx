@@ -1,13 +1,15 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { useGlobalContext } from "../../context";
 import { useCurrentURL } from "../../hooks";
 import { getPageTitleByPathName } from "../../utils";
-import FlyoutMenu from "../Flyout";
+import LazyImage from "../LazyImage";
 import navigationHamburger from "../../assets/navigationHamburger.svg";
 import searchSVG from "../../assets/search.svg";
 import settingsSVG from "../../assets/settings.svg";
 import notificationSVG from "../../assets/notification.svg";
 import "./NavBar.scss";
+
+const FlyoutMenu = lazy(() => import("../Flyout"));
 
 interface NavbarProps {
   userImage: string;
@@ -30,10 +32,12 @@ const Navbar: React.FC<NavbarProps> = ({ userImage, onSearch }) => {
               }`}
               onClick={toggleFlyout}
             >
-              <img
-                src={navigationHamburger}
-                alt="navigation"
-                className="h-5 w-5"
+              <LazyImage
+                image={{
+                  alt: "Navigation",
+                  src: navigationHamburger,
+                  className: "h-5 w-5",
+                }}
               />
             </button>
             <div
@@ -80,15 +84,20 @@ const Navbar: React.FC<NavbarProps> = ({ userImage, onSearch }) => {
             <button className="navbar-notifications p-2 rounded-full bg-gray-100 hover:bg-gray-200">
               <img src={notificationSVG} alt="Notification Icon" />
             </button>
-            <img
-              src={userImage}
-              alt="User"
-              className="navbar-user-image w-10 h-10 rounded-full"
+            <LazyImage
+              image={{
+                alt: "User",
+                src: userImage,
+                className: "navbar-user-image w-10 h-10 rounded-full",
+                transitionDelay: "1s",
+              }}
             />
           </div>
         </div>
       </div>
-      <FlyoutMenu isOpen={isFlyoutOpen} onClose={toggleFlyout} />
+      <Suspense fallback={<></>}>
+        <FlyoutMenu isOpen={isFlyoutOpen} onClose={toggleFlyout} />
+      </Suspense>
     </>
   );
 };

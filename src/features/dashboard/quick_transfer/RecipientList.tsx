@@ -1,4 +1,5 @@
 import { SetStateAction } from "react";
+import LazyImage from "../../../ui/LazyImage";
 import { Recipient } from "../../../types/Recipient";
 import { scrollStyleClasses } from "../../../constants";
 import { UsersInView } from "../../../types/enums/UsersInView";
@@ -63,10 +64,12 @@ const RecipientsList = ({
             setSelectedRecipient(null);
           }}
         >
-          <img
-            src={user.profilePic}
-            alt={user.name}
-            className="user-img rounded-full"
+          <LazyImage
+            image={{
+              alt: user.name,
+              src: user.profilePic ?? "",
+              className: "user-img rounded-full",
+            }}
           />
           <div className="user-info text-center">
             <div className="user-name">{user.name}</div>
