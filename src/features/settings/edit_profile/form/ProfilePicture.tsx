@@ -52,7 +52,11 @@ const ProfilePicture = () => {
   };
 
   return (
-    <div className="profile-picture relative mb-6 lg:mb-0 lg:pl-5">
+    <div
+      className="profile-picture relative mb-6 lg:mb-0 lg:pl-5"
+      aria-live="polite"
+      aria-label="Profile Picture Section"
+    >
       <div className="profile-box">
         <LazyImage
           image={{
@@ -68,10 +72,12 @@ const ProfilePicture = () => {
           onChange={handleFileChange}
           ref={fileInputRef}
           style={{ display: "none" }}
+          aria-label="Upload Profile Picture"
         />
         <button
           className="edit-btn absolute bottom-0 right-0"
           onClick={handleEditClick}
+          aria-label="Edit Profile Picture"
         >
           <EditIcon className="edit-icon w-8 h-8 md:w-6 md:h-6 rounded-full" />
         </button>

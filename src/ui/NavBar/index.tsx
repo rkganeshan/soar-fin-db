@@ -31,6 +31,8 @@ const Navbar: React.FC<NavbarProps> = ({ userImage, onSearch }) => {
                 isFlyoutOpen ? "md:hidden" : ""
               }`}
               onClick={toggleFlyout}
+              aria-label="Toggle navigation menu"
+              aria-expanded={isFlyoutOpen}
             >
               <LazyImage
                 image={{
@@ -44,6 +46,8 @@ const Navbar: React.FC<NavbarProps> = ({ userImage, onSearch }) => {
               className={`navbar-title ${
                 isFlyoutOpen ? "flyout-open" : ""
               } text-xl font-semibold text-gray-800`}
+              aria-live="polite"
+              aria-atomic="true"
             >
               {getPageTitleByPathName(pathname)}
             </div>
@@ -51,6 +55,7 @@ const Navbar: React.FC<NavbarProps> = ({ userImage, onSearch }) => {
               src={userImage}
               alt="User"
               className="navbar-user-image w-10 h-10 rounded-full md:hidden"
+              aria-hidden="true"
             />
           </div>
           <div className="navbar-search md:hidden flex justify-center mt-4">
@@ -60,6 +65,7 @@ const Navbar: React.FC<NavbarProps> = ({ userImage, onSearch }) => {
                 placeholder="Search for something"
                 className="navbar-search-input w-full pl-10 pr-4 py-2 rounded-full bg-gray-100 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                 onChange={(e) => onSearch(e.target.value)}
+                aria-label="Search"
               />
               <div className="navbar-search-icon absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <img src={searchSVG} alt="Search Icon" className="h-5 w-5" />
@@ -73,15 +79,22 @@ const Navbar: React.FC<NavbarProps> = ({ userImage, onSearch }) => {
                 placeholder="Search for something"
                 className="navbar-search-input pl-10 pr-4 py-2 rounded-full bg-gray-100 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                 onChange={(e) => onSearch(e.target.value)}
+                aria-label="Search"
               />
               <div className="navbar-search-icon absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <img src={searchSVG} alt="Search Icon" className="h-5 w-5" />
               </div>
             </div>
-            <button className="navbar-settings p-2 rounded-full bg-gray-100 hover:bg-gray-200">
+            <button
+              className="navbar-settings p-2 rounded-full bg-gray-100 hover:bg-gray-200"
+              aria-label="Settings"
+            >
               <img src={settingsSVG} alt="Settings Icon" />
             </button>
-            <button className="navbar-notifications p-2 rounded-full bg-gray-100 hover:bg-gray-200">
+            <button
+              className="navbar-notifications p-2 rounded-full bg-gray-100 hover:bg-gray-200"
+              aria-label="Notifications"
+            >
               <img src={notificationSVG} alt="Notification Icon" />
             </button>
             <LazyImage

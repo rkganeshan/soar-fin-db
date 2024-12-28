@@ -1,5 +1,9 @@
 const Accounts = () => {
-  return <>Accounts will be here soon.</>;
+  return (
+    <div aria-live="polite" aria-label="Account Information">
+      Accounts will be here soon.
+    </div>
+  );
 };
 
 export default Accounts;

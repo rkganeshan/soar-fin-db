@@ -1,5 +1,9 @@
 const Services = () => {
-  return <>Services will be here soon.</>;
+  return (
+    <div aria-live="polite" aria-label="Services Section">
+      Services will be here soon.
+    </div>
+  );
 };
 
 export default Services;

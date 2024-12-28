@@ -30,28 +30,58 @@ const Dashboard: React.FC = () => {
   }, [isSuccessDashboard]);
 
   return (
-    <div className="dashboard-container md:bg-gray-100 h-full flex flex-col">
-      <div className="my-cards-transactions grid grid-cols-1 lg:grid-cols-3 gap-4">
-        <div className="my-cards-section md:col-span-2">
+    <div
+      className="dashboard-container md:bg-gray-100 h-full flex flex-col"
+      aria-live="polite"
+    >
+      <div
+        className="my-cards-transactions grid grid-cols-1 lg:grid-cols-3 gap-4"
+        aria-label="My Cards and Recent Transactions Section"
+      >
+        <div
+          className="my-cards-section md:col-span-2"
+          aria-label="My Cards Section"
+        >
           <MyCards ref={myCardsRef} />
         </div>
-        <div className="recent-transactions-section">
+        <div
+          className="recent-transactions-section"
+          aria-label="Recent Transactions Section"
+        >
           <RecentTransactions ref={recentTransactionsRef} />
         </div>
       </div>
-      <div className="activity-expenses grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4 md:mt-8">
-        <div className="weekly-activity-section md:col-span-2">
+      <div
+        className="activity-expenses grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4 md:mt-8"
+        aria-label="Weekly Activity and Expense Statistics Section"
+      >
+        <div
+          className="weekly-activity-section md:col-span-2"
+          aria-label="Weekly Activity Section"
+        >
           <WeeklyActivity />
         </div>
-        <div className="expense-statistics-section">
+        <div
+          className="expense-statistics-section"
+          aria-label="Expense Statistics Section"
+        >
           <ExpenseStatistics />
         </div>
       </div>
-      <div className="transfer-history grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4 md:mt-8">
-        <div className="quick-transfer-section ">
+      <div
+        className="transfer-history grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4 md:mt-8"
+        aria-label="Quick Transfer and Balance History Section"
+      >
+        <div
+          className="quick-transfer-section"
+          aria-label="Quick Transfer Section"
+        >
           <QuickTransfer />
         </div>
-        <div className="balance-history-section md:col-span-2">
+        <div
+          className="balance-history-section md:col-span-2"
+          aria-label="Balance History Section"
+        >
           <BalanceHistory />
         </div>
       </div>

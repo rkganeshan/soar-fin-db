@@ -18,6 +18,8 @@ const LazyImage: React.FC<LazyImageProps> = ({ image }) => (
     effect="blur"
     wrapperProps={{
       style: { transitionDelay: image.transitionDelay ?? "0s" },
+      role: "img",
+      "aria-label": image.alt,
     }}
     src={image.src}
   />

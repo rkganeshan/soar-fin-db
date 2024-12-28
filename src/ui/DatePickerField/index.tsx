@@ -27,12 +27,16 @@ const DatePickerField: React.FC<DatePickerFieldProps> = ({
 
   return (
     <div>
-      <label className="block mb-2">{label}</label>
+      <label className="block mb-2" htmlFor={name}>
+        {label}
+      </label>
       <DatePicker
         selected={new Date(value)}
         onChange={handleDateChange}
         className="w-full p-2 pl-3 border rounded-2xl"
         dateFormat="dd MMMM yyyy"
+        id={name}
+        aria-label={label}
       />
     </div>
   );

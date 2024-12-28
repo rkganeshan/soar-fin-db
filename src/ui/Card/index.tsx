@@ -25,16 +25,23 @@ const Card = forwardRef<HTMLElement, CardProps>(
       <div
         ref={ref as LegacyRef<HTMLDivElement>}
         className={`card rounded-2xl shadow ${cardClass} w-full`}
+        role="group"
+        aria-label="Credit Card"
       >
         <div className="card-header p-4 flex justify-between items-start">
           <div className={`card-balance`}>
             <div
               className={`text-sm ${balanceTextClass}`}
               style={{ fontSize: "12px" }}
+              aria-label="Balance Label"
             >
               Balance
             </div>
-            <div className="font-bold" style={{ fontSize: "20px" }}>
+            <div
+              className="font-bold"
+              style={{ fontSize: "20px" }}
+              aria-label="Balance"
+            >
               {balance}
             </div>
           </div>
@@ -44,20 +51,33 @@ const Card = forwardRef<HTMLElement, CardProps>(
               width: "34.7px",
               height: "34.7px",
             }}
+            alt="Card Chip"
           />
         </div>
         <div className="card-holder-valid-thru p-4 flex gap-16 justify-start text-sm mb-2">
           <div className="card-holder">
-            <div className={balanceTextClass} style={{ fontSize: "12px" }}>
+            <div
+              className={balanceTextClass}
+              style={{ fontSize: "12px" }}
+              aria-label="Card Holder Label"
+            >
               CARD HOLDER
             </div>
-            <div style={{ fontSize: "18px" }}>{cardHolder}</div>
+            <div style={{ fontSize: "18px" }} aria-label="Card Holder Name">
+              {cardHolder}
+            </div>
           </div>
           <div className="valid-thru">
-            <div className={balanceTextClass} style={{ fontSize: "12px" }}>
+            <div
+              className={balanceTextClass}
+              style={{ fontSize: "12px" }}
+              aria-label="Valid Thru Label"
+            >
               VALID THRU
             </div>
-            <div style={{ fontSize: "18px" }}>{validThru}</div>
+            <div style={{ fontSize: "18px" }} aria-label="Valid Thru Date">
+              {validThru}
+            </div>
           </div>
         </div>
         <div
@@ -70,14 +90,20 @@ const Card = forwardRef<HTMLElement, CardProps>(
               : {}
           }
         >
-          <div className="card-number text-lg font-medium">{cardNumber}</div>
-          <div className="toggle-icon">
+          <div
+            className="card-number text-lg font-medium"
+            aria-label="Card Number"
+          >
+            {cardNumber}
+          </div>
+          <div className="toggle-icon" aria-label="Card Logo">
             <CardLogo
               style={{
                 width: "44px",
                 height: "30px",
                 fill: theme === "dark" ? "white" : "#9199AF",
               }}
+              aria-hidden="true"
             />
           </div>
         </div>

@@ -20,7 +20,7 @@ const WeeklyActivity: React.FC = () => {
 
   const renderBarChartSection = () => {
     if (isLoadingDashboard) {
-      return <Spinner expand={false} />;
+      return <Spinner expand={false} aria-label="Loading spinner" />;
     }
     if (!isErrorDashboard) {
       return (
@@ -29,10 +29,12 @@ const WeeklyActivity: React.FC = () => {
           options={barChartOptions}
           ref={chartRef}
           plugins={[barChartPlugin]}
+          aria-label="Weekly Activity Bar Chart"
         />
       );
     }
   };
+
   useEffect(() => {
     return () => {
       if (chartRef.current) {
@@ -42,14 +44,20 @@ const WeeklyActivity: React.FC = () => {
   }, []);
 
   return (
-    <div className="weekly-activity">
-      <h2 className="text-lg font-semibold mb-4" style={{ color: "#343C6A" }}>
+    <div className="weekly-activity" aria-live="polite">
+      <h2
+        className="text-lg font-semibold mb-4"
+        style={{ color: "#343C6A" }}
+        aria-label="Weekly Activity Heading"
+      >
         Weekly Activity
       </h2>
       <div
         className={`chart-container bg-white rounded-2xl shadow px-8 pt-4 ${
           isLoadingDashboard ? "shimmer-loader" : ""
         }`}
+        aria-live="polite"
+        aria-label="Chart Container"
       >
         {renderBarChartSection()}
       </div>

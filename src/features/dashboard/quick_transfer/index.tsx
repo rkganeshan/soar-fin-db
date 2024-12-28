@@ -71,12 +71,23 @@ const QuickTransfer: React.FC = () => {
   }, [isLoadingDashboard, isSuccessDashboard, recipients, isShowingAll]);
 
   return (
-    <div className="quick-transfer">
-      <h2 className="text-lg font-semibold mb-4" style={{ color: "#343C6A" }}>
+    <div className="quick-transfer" aria-live="polite">
+      <h2
+        className="text-lg font-semibold mb-4"
+        style={{ color: "#343C6A" }}
+        aria-label="Quick Transfer Heading"
+      >
         Quick Transfer
       </h2>
-      <div className="trf-box bg-white rounded-2xl shadow" ref={trfBoxRef}>
-        {isLoadingDashboard && <Spinner expand={false} />}
+      <div
+        className="trf-box bg-white rounded-2xl shadow"
+        ref={trfBoxRef}
+        aria-live="polite"
+        aria-label="Transfer Box"
+      >
+        {isLoadingDashboard && (
+          <Spinner expand={false} aria-label="Loading Spinner" />
+        )}
         {Boolean(!isLoadingDashboard && recipients) && (
           <>
             <RecipientsList
