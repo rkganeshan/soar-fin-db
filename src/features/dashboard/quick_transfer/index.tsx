@@ -66,62 +66,62 @@ const QuickTransfer: React.FC = () => {
         {isLoadingDashboard ? (
           <Spinner expand={false} />
         ) : (
-          <>
-            <div
-              className={`users-container flex  
-            ${
-              isRecipientsMoreThanThree
-                ? "overflow-x-auto"
-                : "overflow-x-hidden"
-            } ${scrollStyleClasses}}
-            `}
-            >
-              {visibleUsers?.map((user, index) => {
-                console.log(
-                  "user.name::",
-                  user.name,
-                  " user.profilePic:",
-                  user.profilePic
-                );
-                return (
-                  <div key={index} className="user">
-                    <img
-                      src={user.profilePic}
-                      alt={user.name}
-                      className="user-img rounded-full"
-                    />
-                    <div className="user-info text-center">
-                      <div className="user-name">{user.name}</div>
-                      <div className="user-role">{user.role}</div>
+          isSuccessDashboard && (
+            <>
+              <div
+                className={`users-container flex  
+          ${
+            isRecipientsMoreThanThree ? "overflow-x-auto" : "overflow-x-hidden"
+          } ${scrollStyleClasses}}
+          `}
+              >
+                {visibleUsers?.map((user, index) => {
+                  console.log(
+                    "user.name::",
+                    user.name,
+                    " user.profilePic:",
+                    user.profilePic
+                  );
+                  return (
+                    <div key={index} className="user">
+                      <img
+                        src={user.profilePic}
+                        alt={user.name}
+                        className="user-img rounded-full"
+                      />
+                      <div className="user-info text-center">
+                        <div className="user-name">{user.name}</div>
+                        <div className="user-role">{user.role}</div>
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
-              {renderShowToggleBtn()}
-            </div>
-            <div className="transfer-section mt-8 flex items-center space-x-4">
-              <span className="write-amount">Write Amount</span>
-              <div className="input-container">
-                <input
-                  type="text"
-                  placeholder="525.50"
-                  value={amount}
-                  onChange={(e) => setAmount(e.target.value)}
-                  className="amount-input"
-                />
-                <button className="send-btn" style={{ fontSize: "16px" }}>
-                  Send&nbsp;
-                  <img
-                    src={SendIcon}
-                    style={{
-                      width: "26px",
-                      height: "22.6px",
-                    }}
-                  />
-                </button>
+                  );
+                })}
+                {renderShowToggleBtn()}
               </div>
-            </div>
-          </>
+              <div className="transfer-section mt-8 flex items-center space-x-4">
+                <span className="write-amount">Write Amount</span>
+                <div className="input-container">
+                  <input
+                    type="text"
+                    placeholder="525.50"
+                    value={amount}
+                    onChange={(e) => setAmount(e.target.value)}
+                    className="amount-input"
+                  />
+                  <button className="send-btn" style={{ fontSize: "16px" }}>
+                    Send&nbsp;
+                    <img
+                      src={SendIcon}
+                      style={{
+                        width: "26px",
+                        height: "22.6px",
+                      }}
+                    />
+                  </button>
+                </div>
+              </div>
+            </>
+          )
         )}
       </div>
     </div>

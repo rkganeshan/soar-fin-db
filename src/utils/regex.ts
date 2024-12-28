@@ -5,4 +5,7 @@ const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const passwordRegex =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-export { emailRegex, passwordRegex };
+// Mask card number regex
+const maskCardNumberRegex = /^(\d{4})(\d{4})(\d{4})(\d{4})$/;
+
+export { emailRegex, passwordRegex, maskCardNumberRegex };

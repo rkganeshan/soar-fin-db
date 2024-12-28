@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useCallback, useContext } from "react";
 import { useFetchData } from "../hooks/useFetchData";
+import { maskCardNumberRegex } from "../utils/regex";
 import { Card } from "../types/Card";
 import { CategoryData } from "../types/CategoryData";
 import { MonthlyData } from "../types/MonthlyData";
@@ -7,6 +8,7 @@ import { Recipient } from "../types/Recipient";
 import { Transaction } from "../types/Transaction";
 import { WeeklyData } from "../types/WeeklyData";
 import { DashboardAPIData } from "../types/DashboardData";
+import { REPLACE_MASKED_PATTERN } from "../constants";
 import { API_ROUTES } from "../constants/apiRoutes";
 import { userProfilePicMock } from "../constants/userProfilePicMock";
 
@@ -44,10 +46,17 @@ export const DashboardProvider: React.FC<{ children: ReactNode }> = ({
   const prepareImgsForQuickTransferRecipient = useCallback(
     (dashboardData: DashboardAPIData) => ({
       ...dashboardData,
-      transfer: dashboardData?.transfer.map((recipient) => ({
+      transfer: dashboardData.transfer.map((recipient) => ({
         ...recipient,
         profilePic:
           userProfilePicMock[recipient.name as keyof typeof userProfilePicMock],
+      })),
+      cards: dashboardData.cards.map((card) => ({
+        ...card,
+        cardNumber: card.cardNumber.replace(
+          maskCardNumberRegex,
+          REPLACE_MASKED_PATTERN
+        ),
       })),
     }),
     []
