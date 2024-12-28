@@ -22,7 +22,7 @@ const Transaction: React.FC<TransactionProps> = ({
 
   return (
     <>
-      <div className="flex items-start space-x-4">
+      <div className="flex items-start space-x-4" tabIndex={0}>
         <div
           className="transaction-icon flex items-center bg-gray-200 p-2 rounded-full"
           style={{

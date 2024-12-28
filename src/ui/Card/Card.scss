@@ -2,7 +2,13 @@
   transition: transform 0.2s;
   min-width: 350px;
 }
-
+.card-dark {
+  outline: none;
+}
+.card-dark:focus {
+  outline: 2px solid #f0f0f3;
+  outline-offset: -4px;
+}
 .card:hover {
   transform: translateY(-5px);
 }

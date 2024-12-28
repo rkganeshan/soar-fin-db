@@ -55,7 +55,7 @@ const Toast: React.FC<ToastProps & { onClose: () => void }> = ({
         onClick={onClose}
         className="ml-auto text-gray-500 hover:text-gray-700"
       >
-        <AiOutlineClose className="w-4 h-4" />
+        <AiOutlineClose className="w-4 h-4" tabIndex={1} />
       </button>
     </div>
   );

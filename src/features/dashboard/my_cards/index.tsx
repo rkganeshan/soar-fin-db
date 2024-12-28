@@ -73,6 +73,13 @@ const MyCards = forwardRef<HTMLElement>((_, ref) => {
           <div
             className="see-more-less-btn cursor-pointer font-semibold"
             onClick={handleSeeAllClick}
+            onKeyDown={(event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                handleSeeAllClick();
+              }
+            }}
+            tabIndex={0}
           >
             {showScroll ? "See Less" : "See All"}
           </div>
