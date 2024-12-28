@@ -1,50 +1,57 @@
 .quick-transfer {
   .trf-box {
     position: relative;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    height: 276px;
   }
 
   .users-container {
     display: flex;
+    justify-items: flex-start;
     align-items: stretch;
     padding-bottom: 1rem;
     padding-right: 0.4rem;
     padding-left: 0.4rem;
-  }
 
-  .user {
-    flex: 1;
-    max-width: 100%;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-right: 1rem;
-    cursor: pointer;
-  }
+    .user {
+      flex: 1;
+      min-width: 80px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
 
-  .user-img {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-  }
+      .user-img {
+        width: 50px;
+        height: 50px;
+        flex-shrink: 0;
+        object-fit: cover;
+      }
 
-  .user-info {
-    text-align: center;
-    margin-top: 0.5rem;
-  }
+      .user-info {
+        text-align: center;
+        margin-top: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 4rem;
+      }
 
-  .user-name,
-  .user-role {
-    font-size: 0.875rem;
-    transition: font-weight 0.3s;
-  }
+      .user-name,
+      .user-role {
+        font-size: 16px;
+        transition: font-weight 0.3s;
+      }
 
-  .user-role {
-    color: #718ebf;
-  }
-
-  .user:hover {
-    font-weight: bold;
+      .user-role {
+        color: #718ebf;
+      }
+    }
   }
 
   .show-more-btn {
@@ -75,92 +82,59 @@
       background: #f1f1f1;
     }
   }
-
   .transfer-section {
     display: flex;
-    align-items: center;
     justify-content: space-between;
 
     .write-amount {
       font-size: 1rem;
       color: #718ebf;
+      white-space: nowrap;
+      margin-right: 16px;
     }
 
     .input-container {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      width: 320px;
       background: #edf1f7;
       border-radius: 2rem;
       overflow: hidden;
-      color: #718ebf;
 
       .amount-input {
+        width: 55%;
         border: none;
         padding: 0.5rem 1rem;
         background: transparent;
         outline: none;
+        font-size: 1rem;
       }
 
       .send-btn {
+        font-size: 16px;
+        width: 45%;
         background-color: #000;
         color: #fff;
-        padding: 0.8rem 1rem;
+        padding: 0.5rem;
         border: none;
-        cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
         transition: background-color 0.3s;
+        border-radius: 2rem;
 
         &:hover {
           background-color: #333;
         }
-      }
-    }
-  }
-}
 
-@media screen and (min-width: 1320px) {
-  .quick-transfer {
-    .transfer-section {
-      .write-amount {
-        flex: 1;
-      }
-      .input-container {
-        .amount-input {
-          width: 50%;
+        &:disabled {
+          background-color: #474646;
+          cursor: not-allowed;
         }
-      }
-    }
-  }
-}
-@media screen and (min-width: 1140px) and (max-width: 1320px) {
-  .quick-transfer {
-    .transfer-section {
-      .write-amount {
-        flex: 1;
-      }
-      .input-container {
-        .amount-input {
-          width: 90px;
-        }
-      }
-    }
-  }
-}
 
-@media screen and (min-width: 1025px) and (max-width: 1140px) {
-  .quick-transfer {
-    .transfer-section {
-      margin-top: 14px;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 16px;
-      .input-container {
-        margin-left: 0 !important;
-        .amount-input {
-          width: 100%;
+        img {
+          width: 20px;
+          height: 20px;
         }
       }
     }
@@ -169,15 +143,53 @@
 
 @media screen and (max-width: 460px) {
   .quick-transfer {
+    .trf-box {
+      height: 300px;
+    }
     .transfer-section {
-      margin-top: 14px;
       flex-direction: column;
       align-items: flex-start;
+      margin-top: 8px;
       gap: 16px;
+
+      .input-container {
+        margin-left: 0 !important;
+        width: 100%;
+        .amount-input {
+          width: 60%;
+        }
+
+        .send-btn {
+          width: 40%;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1025px) and (max-width: 1350px) {
+  .quick-transfer {
+    .trf-box {
+      height: 290px;
+    }
+    .transfer-section {
+      margin-top: 8px;
+      gap: 8px;
+      flex-direction: column;
+      align-items: flex-start;
+
       .input-container {
         margin-left: 0 !important;
         width: 100%;
       }
+    }
+  }
+}
+
+@media screen and (min-width: 1025px) and (max-width: 1190px) {
+  .quick-transfer {
+    .trf-box {
+      height: 300px;
     }
   }
 }

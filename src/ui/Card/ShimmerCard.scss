@@ -28,3 +28,9 @@
 .shimmer-logo {
   background: #e0e0e0;
 }
+
+@media screen and (max-width: 600px) {
+  .shimmer-card {
+    min-width: 300px;
+  }
+}

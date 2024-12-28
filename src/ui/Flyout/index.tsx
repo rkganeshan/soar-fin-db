@@ -22,6 +22,11 @@ const FlyoutMenu: React.FC<FlyoutMenuProps> = ({ isOpen, onClose }) => {
   const { pathname } = useCurrentURL();
   const navigate = useNavigate();
 
+  const handleNavigate = (to: string) => {
+    onClose();
+    navigate(to);
+  };
+
   return (
     <div
       className={`flyout-menu fixed inset-y-0 left-0 transition-transform duration-300 z-50 ${
@@ -43,7 +48,7 @@ const FlyoutMenu: React.FC<FlyoutMenuProps> = ({ isOpen, onClose }) => {
             <li
               className="flyout-item flex items-center p-2 cursor-pointer"
               onClick={() => {
-                navigate(routerPath.DASHBOARD.ROUTE);
+                handleNavigate(routerPath.DASHBOARD.ROUTE);
               }}
             >
               <DashboardIcon
@@ -60,7 +65,7 @@ const FlyoutMenu: React.FC<FlyoutMenuProps> = ({ isOpen, onClose }) => {
             <li
               className="flyout-item flex items-center p-2 cursor-pointer"
               onClick={() => {
-                navigate(routerPath.TRANSACTIONS.ROUTE);
+                handleNavigate(routerPath.TRANSACTIONS.ROUTE);
               }}
             >
               <Transactions
@@ -77,7 +82,7 @@ const FlyoutMenu: React.FC<FlyoutMenuProps> = ({ isOpen, onClose }) => {
             <li
               className="flyout-item flex items-center p-2 cursor-pointer"
               onClick={() => {
-                navigate(routerPath.ACCOUNTS.ROUTE);
+                handleNavigate(routerPath.ACCOUNTS.ROUTE);
               }}
             >
               <Accounts
@@ -94,7 +99,7 @@ const FlyoutMenu: React.FC<FlyoutMenuProps> = ({ isOpen, onClose }) => {
             <li
               className="flyout-item flex items-center p-2 cursor-pointer"
               onClick={() => {
-                navigate(routerPath.INVESTMENTS.ROUTE);
+                handleNavigate(routerPath.INVESTMENTS.ROUTE);
               }}
             >
               <Investments
@@ -111,7 +116,7 @@ const FlyoutMenu: React.FC<FlyoutMenuProps> = ({ isOpen, onClose }) => {
             <li
               className="flyout-item flex items-center p-2 cursor-pointer"
               onClick={() => {
-                navigate(routerPath.CREDIT_CARD.ROUTE);
+                handleNavigate(routerPath.CREDIT_CARD.ROUTE);
               }}
             >
               <CreditCard
@@ -128,7 +133,7 @@ const FlyoutMenu: React.FC<FlyoutMenuProps> = ({ isOpen, onClose }) => {
             <li
               className="flyout-item flex items-center p-2 cursor-pointer"
               onClick={() => {
-                navigate(routerPath.LOANS.ROUTE);
+                handleNavigate(routerPath.LOANS.ROUTE);
               }}
             >
               <Loans
@@ -143,7 +148,7 @@ const FlyoutMenu: React.FC<FlyoutMenuProps> = ({ isOpen, onClose }) => {
             <li
               className="flyout-item flex items-center p-2 cursor-pointer"
               onClick={() => {
-                navigate(routerPath.SERVICES.ROUTE);
+                handleNavigate(routerPath.SERVICES.ROUTE);
               }}
             >
               <Services
@@ -160,7 +165,7 @@ const FlyoutMenu: React.FC<FlyoutMenuProps> = ({ isOpen, onClose }) => {
             <li
               className="flyout-item flex items-center p-2 cursor-pointer"
               onClick={() => {
-                navigate(routerPath.MY_PRIVILEGES.ROUTE);
+                handleNavigate(routerPath.MY_PRIVILEGES.ROUTE);
               }}
             >
               <MyPrivileges
@@ -177,7 +182,7 @@ const FlyoutMenu: React.FC<FlyoutMenuProps> = ({ isOpen, onClose }) => {
             <li
               className="flyout-item flex items-center p-2 cursor-pointer"
               onClick={() => {
-                navigate(routerPath.SETTINGS.ROUTE);
+                handleNavigate(routerPath.SETTINGS.ROUTE);
               }}
             >
               <Settings

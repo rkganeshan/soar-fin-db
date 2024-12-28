@@ -7,7 +7,7 @@ import currentUser from "../../assets/currentUser.svg";
 import "../globalStyles.scss";
 
 const Layout = () => {
-  const { isFlyoutOpen } = useGlobalContext();
+  const { isFlyoutOpen, toggleFlyout } = useGlobalContext();
   const { pathname } = useCurrentURL();
 
   return (
@@ -23,10 +23,13 @@ const Layout = () => {
             ? "bg-gray-100"
             : "md:bg-gray-100"
         } flex-grow`}
+        onClick={() => {
+          if (isFlyoutOpen) {
+            toggleFlyout();
+          }
+        }}
       >
-        <div
-          className={`content-wrapper ${isFlyoutOpen ? "ml-4" : "lg:ml-12"}`}
-        >
+        <div className={`content-wrapper ${isFlyoutOpen ? "" : "lg:ml-12"}`}>
           <Outlet />
         </div>
       </div>
