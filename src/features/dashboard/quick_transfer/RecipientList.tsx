@@ -82,15 +82,6 @@ const RecipientsList = ({
             }
           }}
           onClick={() => handleSelectRecipient(user)}
-          onBlur={(event) => {
-            // Check if the blur event is caused by focusing another `user` element
-            if (
-              !event.relatedTarget ||
-              !event.relatedTarget.classList.contains("amount-input")
-            ) {
-              setSelectedRecipient(null);
-            }
-          }}
           aria-label={`Recipient ${user.name}`}
         >
           <LazyImage

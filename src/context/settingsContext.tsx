@@ -8,7 +8,7 @@ import React, {
 } from "react";
 import { useFetchData } from "../hooks/useFetchData";
 import { validateFormFields } from "../utils";
-import { useToast } from ".";
+import { useGlobalContext, useToast } from ".";
 import { UserData } from "../types/UserData";
 import { UserForm } from "../types/UserForm";
 import { SettingsTab, ToastType } from "../types/enums";
@@ -52,6 +52,7 @@ export const SettingsProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const { showToast } = useToast();
+  const { setCurrentUserUpdatedImg } = useGlobalContext();
   const [activeTab, setActiveTab] = useState<SettingsTab>(
     SettingsTab.EditProfile
   );
@@ -90,12 +91,14 @@ export const SettingsProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   const handleSaveEditProfileForm = () => {
+    setCurrentUserUpdatedImg(previewUrl);
     showToast({
       message: "Successfully saved!",
       type: ToastType.Success,
     });
     setOriginalValues(formValues);
     setIsProfilePhotoUpdated(false);
+    setPreviewUrl(null);
   };
 
   useEffect(() => {

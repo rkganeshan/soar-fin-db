@@ -17,7 +17,8 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ userImage, onSearch }) => {
-  const { isFlyoutOpen, toggleFlyout } = useGlobalContext();
+  const { isFlyoutOpen, currentUserUpdatedImg, toggleFlyout } =
+    useGlobalContext();
   const { pathname } = useCurrentURL();
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
@@ -68,7 +69,7 @@ const Navbar: React.FC<NavbarProps> = ({ userImage, onSearch }) => {
               {getPageTitleByPathName(pathname)}
             </div>
             <img
-              src={userImage}
+              src={currentUserUpdatedImg || userImage}
               alt="User"
               className="navbar-user-image w-10 h-10 rounded-full md:hidden"
               aria-hidden="true"
@@ -116,7 +117,7 @@ const Navbar: React.FC<NavbarProps> = ({ userImage, onSearch }) => {
             <LazyImage
               image={{
                 alt: "User",
-                src: userImage,
+                src: currentUserUpdatedImg || userImage,
                 className: "navbar-user-image w-10 h-10 rounded-full",
                 transitionDelay: "1s",
               }}
