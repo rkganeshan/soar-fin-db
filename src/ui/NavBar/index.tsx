@@ -18,8 +18,23 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ userImage, onSearch }) => {
   const { isFlyoutOpen, toggleFlyout } = useGlobalContext();
-
   const { pathname } = useCurrentURL();
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault(); // Prevent default scrolling behavior on Space key
+      toggleFlyout();
+
+      // Wait for flyout to render, then set focus
+      setTimeout(() => {
+        const flyoutHeadText =
+          document.querySelector<HTMLElement>(".flyout-head-text");
+        if (flyoutHeadText) {
+          flyoutHeadText.focus();
+        }
+      }, 0);
+    }
+  };
 
   return (
     <>
@@ -31,6 +46,7 @@ const Navbar: React.FC<NavbarProps> = ({ userImage, onSearch }) => {
                 isFlyoutOpen ? "md:hidden" : ""
               }`}
               onClick={toggleFlyout}
+              onKeyDown={handleKeyDown}
               aria-label="Toggle navigation menu"
               aria-expanded={isFlyoutOpen}
             >

@@ -1,5 +1,6 @@
 import { SetStateAction, useState } from "react";
 import { useToast } from "../../../context";
+import Tooltip from "../../../ui/Tooltip";
 import { ToastType } from "../../../types/enums";
 import { Recipient } from "../../../types/Recipient";
 import SendIcon from "../../../assets/send.png";
@@ -50,6 +51,13 @@ const AmountInputAndTransfer = ({
 
   const isSendBtnDisabled = !(recipient && amount) || fakeTransferring;
 
+  const tooltipText = (() => {
+    if (!recipient && !amount) return "Select user and enter amount";
+    if (!recipient) return "Select a user";
+    if (!amount) return "Enter the amount";
+    return "";
+  })();
+
   return (
     <>
       <div
@@ -75,21 +83,25 @@ const AmountInputAndTransfer = ({
             disabled={isSendBtnDisabled}
             aria-label="Send Button"
           >
-            {fakeTransferring ? (
-              <>Sending...</>
-            ) : (
-              <>
-                Send&nbsp;
-                <img
-                  src={SendIcon}
-                  style={{
-                    width: "26px",
-                    height: "22.6px",
-                  }}
-                  alt="Send Icon"
-                />
-              </>
-            )}
+            <Tooltip content={tooltipText}>
+              <span className="flex">
+                {fakeTransferring ? (
+                  <>Sending...</>
+                ) : (
+                  <>
+                    Send&nbsp;
+                    <img
+                      src={SendIcon}
+                      style={{
+                        width: "26px",
+                        height: "22.6px",
+                      }}
+                      alt="Send Icon"
+                    />
+                  </>
+                )}
+              </span>
+            </Tooltip>
           </button>
         </div>
       </div>

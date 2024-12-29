@@ -44,12 +44,6 @@ const RecipientsList = ({
             if (event.key === "Enter" || event.key === " ") {
               event.preventDefault(); // Prevent default scroll behavior for space
               setIsShowingAll((prev) => !prev);
-            } else if (event.key === "Tab" && !isShowingAll) {
-              event.preventDefault(); // Prevent default Tab behavior
-              const firstUserElement = document.querySelector(".user");
-              if (firstUserElement) {
-                (firstUserElement as HTMLDivElement).focus(); // Shift focus to the first .user element
-              }
             }
           }}
           className={`show-more-btn shadow-md ${

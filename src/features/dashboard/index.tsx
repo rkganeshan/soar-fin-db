@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useDashboardContext } from "../../context/dashboardContext";
+import Alert from "../../ui/Alert";
 import MyCards from "./my_cards";
 import RecentTransactions from "./recent_transactions";
 import WeeklyActivity from "./weekly_activity";
@@ -9,7 +10,7 @@ import BalanceHistory from "./balance_history";
 import "./Dashboard.scss";
 
 const Dashboard: React.FC = () => {
-  const { isSuccessDashboard } = useDashboardContext();
+  const { isSuccessDashboard, isErrorDashboard } = useDashboardContext();
   const myCardsRef = useRef<HTMLDivElement>(null);
   const recentTransactionsRef = useRef<HTMLElement>(null);
 
@@ -28,6 +29,22 @@ const Dashboard: React.FC = () => {
       window.removeEventListener("resize", adjustHeight);
     };
   }, [isSuccessDashboard]);
+
+  if (isErrorDashboard) {
+    return (
+      <div
+        className="dashboard-container md:bg-gray-100 h-full flex flex-col"
+        aria-live="polite"
+      >
+        <Alert
+          message="Failed to retrieve the dashboard infomation."
+          type="error"
+          aria-live="polite"
+          aria-label="Error Alert"
+        />
+      </div>
+    );
+  }
 
   return (
     <div

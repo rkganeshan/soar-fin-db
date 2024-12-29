@@ -33,18 +33,37 @@ export const expenseStatisticsPieChartUtils = ({
       },
       datalabels: {
         color: "#fff",
-        font: {
-          weight: "bold",
-          size: 12,
-        },
-        textAlign: "center",
+        font: [
+          {
+            weight: "bold",
+            size: 12,
+            lineHeight: 1.5,
+          },
+          {
+            weight: "bold",
+            size: 11,
+            lineHeight: 1.5,
+          },
+          {
+            weight: "bold",
+            size: 12,
+            lineHeight: 1.5,
+          },
+          {
+            weight: "bold",
+            size: 12,
+            lineHeight: 1.5,
+          },
+        ],
+        textAlign: ["center", "center", "center", "center"],
+        offset: [, 1, , ,],
         formatter: (value: number, context: any) => {
           const percentage = `${value}%`;
           const label = context.chart.data.labels[context.dataIndex];
           return `${percentage}\n${label}`;
         },
-        align: ["center", "end", "center", "center"],
-        anchor: "center",
+        align: ["center", "start", "center", "end"],
+        anchor: ["center", "end", "center", "center"],
       },
     },
     animation: {

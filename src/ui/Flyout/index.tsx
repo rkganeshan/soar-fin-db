@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../../context";
-import { useCurrentURL } from "../../hooks";
+import { useCurrentURL, useMediaQuery } from "../../hooks";
 import { routerPath } from "../../constants";
 import FlyoutHeader from "../../assets/flyoutHeader.svg?react";
 import DashboardIcon from "../../assets/dashboard.svg?react";
@@ -13,23 +13,60 @@ import Loans from "../../assets/loans.svg?react";
 import MyPrivileges from "../../assets/myprivileges.svg?react";
 import Services from "../../assets/services.svg?react";
 import Settings from "../../assets/settingssolid.svg?react";
+import "./Flyout.scss";
 
 interface FlyoutMenuProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
+const menuItems = [
+  {
+    label: "Dashboard",
+    route: routerPath.DASHBOARD.ROUTE,
+    Icon: DashboardIcon,
+  },
+  {
+    label: "Transactions",
+    route: routerPath.TRANSACTIONS.ROUTE,
+    Icon: Transactions,
+  },
+  { label: "Accounts", route: routerPath.ACCOUNTS.ROUTE, Icon: Accounts },
+  {
+    label: "Investments",
+    route: routerPath.INVESTMENTS.ROUTE,
+    Icon: Investments,
+  },
+  {
+    label: "Credit Cards",
+    route: routerPath.CREDIT_CARD.ROUTE,
+    Icon: CreditCard,
+  },
+  { label: "Loans", route: routerPath.LOANS.ROUTE, Icon: Loans },
+  { label: "Services", route: routerPath.SERVICES.ROUTE, Icon: Services },
+  {
+    label: "My Privileges",
+    route: routerPath.MY_PRIVILEGES.ROUTE,
+    Icon: MyPrivileges,
+  },
+  { label: "Settings", route: routerPath.SETTINGS.ROUTE, Icon: Settings },
+];
+
 const FlyoutMenu: React.FC<FlyoutMenuProps> = ({ isOpen, onClose }) => {
+  const screenWidth = useMediaQuery();
   const { isFlyoutOpen } = useGlobalContext();
   const { pathname } = useCurrentURL();
   const navigate = useNavigate();
 
   const handleNavigate = (to: string) => {
-    onClose();
+    if (screenWidth < 1024) {
+      onClose();
+    }
     navigate(to);
   };
+
   if (!isFlyoutOpen) {
-    return <></>;
+    return null;
   }
 
   return (
@@ -62,267 +99,40 @@ const FlyoutMenu: React.FC<FlyoutMenuProps> = ({ isOpen, onClose }) => {
             Soar Task
           </h2>
         </div>
-        <div className="flyout-body p-4">
+        <div className="flyout-body p-4 pl-0">
           <ul role="menu">
-            <li
-              className="flyout-item flex items-center p-2 cursor-pointer"
-              onClick={() => {
-                handleNavigate(routerPath.DASHBOARD.ROUTE);
-              }}
-              role="menuitem"
-              aria-label="Dashboard"
-              aria-current={
-                pathname == routerPath.DASHBOARD.ROUTE ? "page" : undefined
-              }
-              tabIndex={0}
-              onKeyDown={(event) => {
-                if (event.key === "Enter" || event.key === " ") {
-                  event.preventDefault();
-                  handleNavigate(routerPath.DASHBOARD.ROUTE);
-                }
-              }}
-            >
-              <DashboardIcon
-                className="h-5 w-5 mr-4"
-                style={{
-                  fill:
-                    pathname == routerPath.DASHBOARD.ROUTE
-                      ? "#232323"
-                      : "#B1B1B1",
-                }}
-              />
-              <span>Dashboard</span>
-            </li>
-            <li
-              className="flyout-item flex items-center p-2 cursor-pointer"
-              onClick={() => {
-                handleNavigate(routerPath.TRANSACTIONS.ROUTE);
-              }}
-              role="menuitem"
-              aria-label="Transactions"
-              aria-current={
-                pathname == routerPath.TRANSACTIONS.ROUTE ? "page" : undefined
-              }
-              tabIndex={0}
-              onKeyDown={(event) => {
-                if (event.key === "Enter" || event.key === " ") {
-                  event.preventDefault();
-                  handleNavigate(routerPath.TRANSACTIONS.ROUTE);
-                }
-              }}
-            >
-              <Transactions
-                className="h-5 w-5 mr-4"
-                style={{
-                  fill:
-                    pathname == routerPath.TRANSACTIONS.ROUTE
-                      ? "#232323"
-                      : "#B1B1B1",
-                }}
-              />
-              <span>Transactions</span>
-            </li>
-            <li
-              className="flyout-item flex items-center p-2 cursor-pointer"
-              onClick={() => {
-                handleNavigate(routerPath.ACCOUNTS.ROUTE);
-              }}
-              role="menuitem"
-              aria-label="Accounts"
-              aria-current={
-                pathname == routerPath.ACCOUNTS.ROUTE ? "page" : undefined
-              }
-              tabIndex={0}
-              onKeyDown={(event) => {
-                if (event.key === "Enter" || event.key === " ") {
-                  event.preventDefault();
-                  handleNavigate(routerPath.ACCOUNTS.ROUTE);
-                }
-              }}
-            >
-              <Accounts
-                className="h-5 w-5 mr-4"
-                style={{
-                  fill:
-                    pathname == routerPath.ACCOUNTS.ROUTE
-                      ? "#232323"
-                      : "#B1B1B1",
-                }}
-              />
-              <span>Accounts</span>
-            </li>
-            <li
-              className="flyout-item flex items-center p-2 cursor-pointer"
-              onClick={() => {
-                handleNavigate(routerPath.INVESTMENTS.ROUTE);
-              }}
-              role="menuitem"
-              aria-label="Investments"
-              aria-current={
-                pathname == routerPath.INVESTMENTS.ROUTE ? "page" : undefined
-              }
-              tabIndex={0}
-              onKeyDown={(event) => {
-                if (event.key === "Enter" || event.key === " ") {
-                  event.preventDefault();
-                  handleNavigate(routerPath.INVESTMENTS.ROUTE);
-                }
-              }}
-            >
-              <Investments
-                className="h-5 w-5 mr-4"
-                style={{
-                  fill:
-                    pathname == routerPath.INVESTMENTS.ROUTE
-                      ? "#232323"
-                      : "#B1B1B1",
-                }}
-              />
-              <span>Investments</span>
-            </li>
-            <li
-              className="flyout-item flex items-center p-2 cursor-pointer"
-              onClick={() => {
-                handleNavigate(routerPath.CREDIT_CARD.ROUTE);
-              }}
-              role="menuitem"
-              aria-label="Credit Cards"
-              aria-current={
-                pathname == routerPath.CREDIT_CARD.ROUTE ? "page" : undefined
-              }
-              tabIndex={0}
-              onKeyDown={(event) => {
-                if (event.key === "Enter" || event.key === " ") {
-                  event.preventDefault();
-                  handleNavigate(routerPath.CREDIT_CARD.ROUTE);
-                }
-              }}
-            >
-              <CreditCard
-                className="h-5 w-5 mr-4"
-                style={{
-                  fill:
-                    pathname == routerPath.CREDIT_CARD.ROUTE
-                      ? "#232323"
-                      : "#B1B1B1",
-                }}
-              />
-              <span>Credit Cards</span>
-            </li>
-            <li
-              className="flyout-item flex items-center p-2 cursor-pointer"
-              onClick={() => {
-                handleNavigate(routerPath.LOANS.ROUTE);
-              }}
-              role="menuitem"
-              aria-label="Loans"
-              aria-current={
-                pathname == routerPath.LOANS.ROUTE ? "page" : undefined
-              }
-              tabIndex={0}
-              onKeyDown={(event) => {
-                if (event.key === "Enter" || event.key === " ") {
-                  event.preventDefault();
-                  handleNavigate(routerPath.LOANS.ROUTE);
-                }
-              }}
-            >
-              <Loans
-                className="h-5 w-5 mr-4"
-                style={{
-                  fill:
-                    pathname == routerPath.LOANS.ROUTE ? "#232323" : "#B1B1B1",
-                }}
-              />
-              <span>Loans</span>
-            </li>
-            <li
-              className="flyout-item flex items-center p-2 cursor-pointer"
-              onClick={() => {
-                handleNavigate(routerPath.SERVICES.ROUTE);
-              }}
-              role="menuitem"
-              aria-label="Services"
-              aria-current={
-                pathname == routerPath.SERVICES.ROUTE ? "page" : undefined
-              }
-              tabIndex={0}
-              onKeyDown={(event) => {
-                if (event.key === "Enter" || event.key === " ") {
-                  event.preventDefault();
-                  handleNavigate(routerPath.SERVICES.ROUTE);
-                }
-              }}
-            >
-              <Services
-                className="h-5 w-5 mr-4"
-                style={{
-                  fill:
-                    pathname == routerPath.SERVICES.ROUTE
-                      ? "#232323"
-                      : "#B1B1B1",
-                }}
-              />
-              <span>Services</span>
-            </li>
-            <li
-              className="flyout-item flex items-center p-2 cursor-pointer"
-              onClick={() => {
-                handleNavigate(routerPath.MY_PRIVILEGES.ROUTE);
-              }}
-              role="menuitem"
-              aria-label="My Privileges"
-              aria-current={
-                pathname == routerPath.MY_PRIVILEGES.ROUTE ? "page" : undefined
-              }
-              tabIndex={0}
-              onKeyDown={(event) => {
-                if (event.key === "Enter" || event.key === " ") {
-                  event.preventDefault();
-                  handleNavigate(routerPath.MY_PRIVILEGES.ROUTE);
-                }
-              }}
-            >
-              <MyPrivileges
-                className="h-5 w-5 mr-4"
-                style={{
-                  fill:
-                    pathname == routerPath.MY_PRIVILEGES.ROUTE
-                      ? "#232323"
-                      : "#B1B1B1",
-                }}
-              />
-              <span>My Privileges</span>
-            </li>
-            <li
-              className="flyout-item flex items-center p-2 cursor-pointer"
-              onClick={() => {
-                handleNavigate(routerPath.SETTINGS.ROUTE);
-              }}
-              role="menuitem"
-              aria-label="Settings"
-              aria-current={
-                pathname == routerPath.SETTINGS.ROUTE ? "page" : undefined
-              }
-              tabIndex={0}
-              onKeyDown={(event) => {
-                if (event.key === "Enter" || event.key === " ") {
-                  event.preventDefault();
-                  handleNavigate(routerPath.SETTINGS.ROUTE);
-                }
-              }}
-            >
-              <Settings
-                className="h-5 w-5 mr-4"
-                style={{
-                  fill:
-                    pathname == routerPath.SETTINGS.ROUTE
-                      ? "#232323"
-                      : "#B1B1B1",
-                }}
-              />
-              <span>Settings</span>
-            </li>
+            {menuItems.map(({ label, route, Icon }) => {
+              const isActive = pathname === route;
+              return (
+                <li
+                  key={label}
+                  className={`flyout-item flex items-center gap-4 p-2 pl-0 cursor-pointer ${
+                    isActive ? "flyout-item--active" : ""
+                  }`}
+                  onClick={() => handleNavigate(route)}
+                  role="menuitem"
+                  aria-label={label}
+                  aria-current={isActive ? "page" : undefined}
+                  tabIndex={0}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault();
+                      handleNavigate(route);
+                    }
+                  }}
+                >
+                  <Icon
+                    className={`h-5 w-5  ${
+                      isActive ? "text-primary ml-4" : "text-secondary ml-6"
+                    }`}
+                    style={{
+                      fill: isActive ? "#232323" : "#B1B1B1",
+                    }}
+                  />
+                  <span>{label}</span>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </div>
