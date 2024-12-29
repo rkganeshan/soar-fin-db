@@ -22,6 +22,9 @@ export const GlobalProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [isFlyoutOpen, setFlyoutOpen] = useState(false);
+  const [currentUserUpdatedImg, setCurrentUserUpdatedImg] = useState<
+    string | null
+  >(null);
   const screenWidth = useMediaQuery();
 
   const toggleFlyout = () => {
@@ -36,7 +39,13 @@ export const GlobalProvider: React.FC<{ children: ReactNode }> = ({
 
   return (
     <GlobalContext.Provider
-      value={{ isFlyoutOpen, setFlyoutOpen, toggleFlyout }}
+      value={{
+        isFlyoutOpen,
+        currentUserUpdatedImg,
+        setFlyoutOpen,
+        toggleFlyout,
+        setCurrentUserUpdatedImg,
+      }}
     >
       {children}
     </GlobalContext.Provider>

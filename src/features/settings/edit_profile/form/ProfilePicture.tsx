@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { useToast } from "../../../../context";
+import { useGlobalContext, useToast } from "../../../../context";
 import { useSettingsContext } from "../../../../context/settingsContext";
 import LazyImage from "../../../../ui/LazyImage";
 import {
@@ -11,6 +11,7 @@ import CurrentUser from "../../../../assets/currentUser.svg";
 import EditIcon from "../../../../assets/pencil.svg?react";
 
 const ProfilePicture = () => {
+  const { currentUserUpdatedImg } = useGlobalContext();
   const { previewUrl, setPreviewUrl, setIsProfilePhotoUpdated } =
     useSettingsContext();
   const { showToast } = useToast();
@@ -61,7 +62,7 @@ const ProfilePicture = () => {
         <LazyImage
           image={{
             alt: "Profile",
-            src: previewUrl || CurrentUser,
+            src: previewUrl ? previewUrl : currentUserUpdatedImg || CurrentUser,
             className: "profile-img rounded-full relative",
             transitionDelay: "1s",
           }}
