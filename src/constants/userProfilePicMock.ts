@@ -10,4 +10,5 @@ export const userProfilePicMock = {
   "Robert Jacob": Person3,
   "John Doe": Person4,
   "Jane Smith": Person5,
+  default: Person2,
 };

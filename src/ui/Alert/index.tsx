@@ -15,7 +15,7 @@ const Alert: React.FC<AlertProps> = ({ message, type = "info" }) => {
 
   return (
     <div
-      className={`w-full px-4 py-3 border rounded-md ${alertStyles[type]} flex items-center`}
+      className={`alert w-full px-4 py-3 border rounded-md ${alertStyles[type]} flex items-center`}
       role="alert"
       aria-live="assertive"
       aria-label={`${type.charAt(0).toUpperCase() + type.slice(1)} Alert`}

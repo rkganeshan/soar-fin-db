@@ -5,12 +5,6 @@
   padding-bottom: 14px;
 }
 
-@media (min-width: 1024px) {
-  .dashboard-container {
-    flex-direction: row;
-  }
-}
-
 .my-cards-section,
 .recent-transactions-section,
 .weekly-activity-section,
@@ -22,17 +16,26 @@
   flex-direction: column;
 }
 
+@media (min-width: 1024px) {
+  .dashboard-container {
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 601px) {
+  .dashboard-container {
+    .alert{
+      width: 50%;
+    }
+  }
+}
+
 .my-cards-section {
   margin-bottom: 2rem;
 
   @media (min-width: 1025px) {
     margin-bottom: 0;
   }
-}
-
-.recent-transactions-section {
-  display: flex;
-  flex-direction: column;
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
@@ -48,10 +51,4 @@
       margin-top: 2rem;
     }
   }
-}
-.weekly-activity-section,
-.expense-statistics-section {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
 }

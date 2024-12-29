@@ -1,0 +1,16 @@
+.flyout-item--active {
+  position: relative;
+  padding-left: 6px;
+}
+
+.flyout-item--active::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 6px;
+  background-color: #232323;
+  border-top-right-radius: 24px;
+  border-bottom-right-radius: 24px;
+}

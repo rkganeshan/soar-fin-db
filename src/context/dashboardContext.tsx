@@ -41,23 +41,34 @@ export const useDashboardContext = () => {
 export const DashboardProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  /* Modify the transfer list data to append profile picture,
-   * in an ideal scenario, imageUrl would be sent response. */
   const prepareImgsForQuickTransferRecipient = useCallback(
     (dashboardData: DashboardAPIData) => ({
       ...dashboardData,
+      /* Modify the transfer list data to append profile picture,
+       * in an ideal scenario, imageUrl would be sent response. */
       transfer: dashboardData.transfer.map((recipient) => ({
         ...recipient,
         profilePic:
-          userProfilePicMock[recipient.name as keyof typeof userProfilePicMock],
+          recipient.name in userProfilePicMock
+            ? userProfilePicMock[
+                recipient.name as keyof typeof userProfilePicMock
+              ]
+            : userProfilePicMock["default" as keyof typeof userProfilePicMock],
       })),
-      cards: dashboardData.cards.map((card) => ({
+      // Mask the original card number and have it in maskedCards
+      maskedCards: dashboardData.cards.map((card) => ({
         ...card,
         cardNumber: card.cardNumber.replace(
           maskCardNumberRegex,
           REPLACE_MASKED_PATTERN
         ),
       })),
+      // Sort transactions by date (most recent date appears first in the list)
+      transactions: dashboardData.transactions
+        .slice()
+        .sort(
+          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+        ),
     }),
     []
   );
@@ -67,7 +78,7 @@ export const DashboardProvider: React.FC<{ children: ReactNode }> = ({
     isError: isErrorDashboard,
     isSuccess: isSuccessDashboard,
     data: dashboardData,
-  } = useFetchData<DashboardAPIData>(
+  } = useFetchData<DashboardAPIData & { maskedCards?: Card[] }>(
     API_ROUTES.getDashboard,
     prepareImgsForQuickTransferRecipient
   );
@@ -78,7 +89,7 @@ export const DashboardProvider: React.FC<{ children: ReactNode }> = ({
         isLoadingDashboard,
         isErrorDashboard,
         isSuccessDashboard,
-        cards: dashboardData?.cards,
+        cards: dashboardData?.maskedCards,
         transactions: dashboardData?.transactions,
         weekly: dashboardData?.weekly,
         statistics: dashboardData?.statistics,
