@@ -18,6 +18,13 @@ const Toast: React.FC<ToastProps & { onClose: () => void }> = ({
 }) => {
   const [isVisible, setIsVisible] = useState(true);
 
+  const toasTypeString =
+    type === ToastType.Success
+      ? "toast-bg-success"
+      : type === ToastType.Error
+      ? "toast-bg-error"
+      : "toast-bg-warning";
+
   const getIcon = () => {
     switch (type) {
       case ToastType.Success:
@@ -40,7 +47,7 @@ const Toast: React.FC<ToastProps & { onClose: () => void }> = ({
 
   return (
     <div
-      className={`flex transition-opacity-300 ease-in justify-between bg-white border border-gray-200 shadow-md rounded-lg p-4 flex items-center space-x-4 ${
+      className={`${toasTypeString} flex transition-opacity-300 ease-in justify-between bg-white border border-gray-200 shadow-md rounded-lg p-4 flex items-center space-x-4 ${
         isVisible ? "visible" : "hidden"
       }`}
       role="alert"
