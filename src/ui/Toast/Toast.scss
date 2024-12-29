@@ -36,6 +36,16 @@
   animation: slideOutToTop 0.5s ease-in forwards;
 }
 
+.toast-bg-success {
+  background-color: #d5f5e2 !important;
+}
+.toast-bg-error {
+  background-color: #f7dcdc !important;
+}
+.toast-bg-warning {
+  background-color: #faf6d7 !important;
+}
+
 @media screen and (max-width: 480px) {
   .toast {
     right: unset;
