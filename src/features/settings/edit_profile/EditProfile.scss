@@ -38,6 +38,12 @@
 
 .settings-page {
   .save-container {
+    .tooltip-wrapper {
+      .tooltip-content {
+        bottom: 80%;
+      }
+    }
+    
     .save-btn {
       width: 100%;
       outline: none;
