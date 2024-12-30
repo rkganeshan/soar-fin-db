@@ -86,7 +86,15 @@ const AmountInputAndTransfer = ({
             <Tooltip content={tooltipText}>
               <span className="flex">
                 {fakeTransferring ? (
-                  <>Sending...</>
+                  <img
+                    src={SendIcon}
+                    style={{
+                      width: "26px",
+                      height: "22.6px",
+                      animation: "moveRotate 1s infinite",
+                    }}
+                    alt="Send Icon"
+                  />
                 ) : (
                   <>
                     Send&nbsp;
